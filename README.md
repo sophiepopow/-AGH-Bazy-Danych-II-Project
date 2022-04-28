@@ -30,10 +30,12 @@ cd client <br />
 npm install <br />
 npm start // ON WINDOWS <br />
 npm run start-mac // ON LINUX <br />
-appilcation starts on the port 8000 <br />
+
+appilcation starts on the port 8000
 
 ### Uruchomienie aplikacji backendowej
 cd server <br />
 npm install <br />
-appilcation starts on the port 3000 <br />
 npm start <br />
+
+appilcation starts on the port 3000
