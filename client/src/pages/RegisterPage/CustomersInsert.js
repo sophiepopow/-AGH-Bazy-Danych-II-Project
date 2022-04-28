@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
-import api from '../api'
+import api from '../../api'
+import Button from '@mui/material/Button';
 
 import styled from 'styled-components'
 
@@ -24,11 +25,11 @@ const InputText = styled.input.attrs({
     margin: 5px;
 `
 
-const Button = styled.button.attrs({
-    className: `btn btn-primary`,
-})`
-    margin: 15px 15px 15px 5px;
-`
+// const Button = styled.button.attrs({
+//     className: `btn btn-primary`,
+// })`
+//     margin: 15px 15px 15px 5px;
+// `
 
 const CancelButton = styled.a.attrs({
     className: `btn btn-danger`,
@@ -106,8 +107,8 @@ class CustomersInsert extends Component {
                     onChange={this.handleChangeInputAge}
                 />
 
-                <Button onClick={this.handleIncludeCustomer}>Add Customer</Button>
-                <CancelButton href={'/customer/list'}>Cancel</CancelButton>
+                <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Add Customer</Button>
+                <Button variant="contained" color="secondary" >Cancel</Button>
             </Wrapper>
         )
     }
