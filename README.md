@@ -22,18 +22,18 @@ Express.js - lekki framework do budowy aplikacji internetowych dla platformy Nod
 Zdecydowaliśmy się na powyższy stack technologiczny ze względu na popularność jego wykorzystania w aplikacjach o podobnej charakterystyce do naszego projektu.
 
 ### Requirements
-node version v14.19.1 recommended
-npm version 6.14.16 recommended
+- node version v14.19.1 recommended
+- npm version 6.14.16 recommended
 
 ### Uruchomienie aplikacji frontendowej
-cd client
-npm install
-npm start // ON WINDOWS
-npm run start-mac // ON LINUX
-appilcation starts on the port 8000
+cd client </ br>
+npm install </ br>
+npm start // ON WINDOWS </ br>
+npm run start-mac // ON LINUX </ br>
+appilcation starts on the port 8000 </ br>
 
 ### Uruchomienie aplikacji backendowej
-cd server
-npm install
-appilcation starts on the port 3000
-npm start
+cd server </ br>
+npm install </ br>
+appilcation starts on the port 3000 </ br>
+npm start </ br>
