@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 
-const pages = ['Login', 'Register', 'Categories', 'Stores', "Customer List"];
+const pages = ['LoginPage', 'Register', 'Categories', 'Stores', "Customer List"];
 const pagesLinks = ['/login', '/register', '/categories', '/stores', '/customers/list'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
