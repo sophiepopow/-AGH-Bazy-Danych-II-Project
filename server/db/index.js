@@ -1,10 +1,19 @@
 const mongoose = require('mongoose')
 
-mongoose
-    .connect('mongodb://127.0.0.1:27017/warzywniaczek', { useNewUrlParser: true })
-    .catch(e => {
-        console.error('Connection error', e.message)
+const url = "mongodb+srv://Admin:admin1@cluster0.qfhhd.mongodb.net/Warzywniaczek?retryWrites=true&w=majority";
+
+const connectionParams={
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}
+mongoose.connect(url,connectionParams)
+    .then( () => {
+        console.log('Connected to the database ')
     })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. n${err}`);
+    })
+
 
 const db = mongoose.connection
 
