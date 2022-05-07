@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
+import styles from './NavBar.module.css';
 
 const pages = ['LoginPage', 'Register', 'Categories', 'Stores', "Customer List"];
 const pagesLinks = ['/login', '/register', '/categories', '/stores', '/customers/list'];
@@ -39,7 +40,7 @@ const ResponsiveAppBar = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="success">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -49,7 +50,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <img src="logo.png" className={styles.logo}/>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
