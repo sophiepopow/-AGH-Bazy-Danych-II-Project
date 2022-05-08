@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Products.module.css';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,11 +7,25 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Grid} from "@mui/material";
+import api from '../../api';
+import { toast } from 'react-toastify';
 
-let productsList = ['Cebula', 'Pomidor', 'Cytryna', 'Szpinak','Marchewka', 'Brokół','Dynia']
 // productList db get items
-const Products = () => (
-  <div className={styles.Products}>
+const Products = () => {
+    const [productsList, setProductList] = useState([]);
+
+    useEffect(() => {
+        api.getAllProducts()
+        .then((products) => {
+            setProductList(products.data.data)
+        })
+        .catch((e) => {
+            console.log(e)
+            toast.error("Cannot load the products :c")
+        })
+    }, []);
+
+  return <div className={styles.Products}>
       <Typography variant="h2" padding={5}>
           Produkty w naszym sklepie:
           
@@ -19,7 +33,7 @@ const Products = () => (
       <Grid container  spacing={7} justifyContent={"center"} padding={10} sx={{ display: 'flex' }}>
 
           {productsList.map((item)=>{
-              return <Grid item sx={{ flexDirection: 'row' }}  xs={6} sm={4} md={3} key={item} minWidth={300}
+              return <Grid item sx={{ flexDirection: 'row' }}  xs={6} sm={4} md={3} key={item._id} minWidth={300}
                            ><Card >
                   <CardMedia
                       component="img"
@@ -28,7 +42,7 @@ const Products = () => (
                   />
                   <CardContent>
                       <Typography gutterBottom variant="h4" component="div">
-                          {item}
+                          {item.productName}
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
                           {item.price} PLN za kg
@@ -46,7 +60,7 @@ const Products = () => (
       </Grid>
 
   </div>
-);
+};
 
 Products.propTypes = {};
 
