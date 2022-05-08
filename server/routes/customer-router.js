@@ -1,7 +1,5 @@
 const express = require('express')
-
 const CustomerCtrl = require('../controllers/customer-ctrl')
-
 const router = express.Router()
 
 router.post('/customer', CustomerCtrl.createCustomer)

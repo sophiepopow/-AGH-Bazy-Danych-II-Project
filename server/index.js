@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const morgan = require('morgan')
 
 const db = require('./db')
 const customerRouter = require('./routes/customer-router')
@@ -8,6 +9,7 @@ const customerRouter = require('./routes/customer-router')
 const app = express()
 const apiPort = 3000
 
+app.use(morgan("tiny"))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json())

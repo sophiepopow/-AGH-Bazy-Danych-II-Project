@@ -14,8 +14,44 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import styles from './NavBar.module.css';
 
-const pages = ['LoginPage', 'Register', 'Categories', 'Stores', "Customer List"];
-const pagesLinks = ['/login', '/register', '/categories', '/stores', '/customers/list'];
+// mocked users roles
+// admin
+const user =  {
+  role: "admin",
+  email: "admin@admin.com",
+  name: "Jan",
+  surname: "Kowalski",
+  age: 18
+}
+
+// not logged in
+// const user = undefined
+
+// user but not admin
+// const user = {
+//     role: "customer",
+//     email: "admin@admin.com",
+//     name: "Jan",
+//     surname: "Kowalski",
+//     age: 18
+//   }
+
+const showAlways = () => true
+const isNotLoggedIn = (user) => !user;
+const isLoggedIn = (user) => user;
+const isAdmin = (user) => user && user.role == "admin";
+
+const pages = ['Login', 'Register', 'Products', 'Admin Panel', 'Stores', "Customer List", 'logout'];
+const showPanelCondition = [
+  isNotLoggedIn,
+  isNotLoggedIn,
+  showAlways,
+  isAdmin,
+  showAlways,
+  isAdmin,
+  isLoggedIn
+]
+const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/customers/list', '/logout'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -99,7 +135,8 @@ const ResponsiveAppBar = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page, i) => (
-              <Button
+              <>
+               {showPanelCondition[i](user) && <Button
                 key={page}
                 onClick={() => {
                     navigate(pagesLinks[i]);
@@ -109,6 +146,8 @@ const ResponsiveAppBar = () => {
               >
                 {page}
               </Button>
+              }
+              </>
             ))}
           </Box>
 
