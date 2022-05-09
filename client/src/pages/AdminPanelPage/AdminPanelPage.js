@@ -11,11 +11,18 @@ export const AdminPanelPage = () => {
     const [price, setPrice] = useState(0);
 
     const submitProduct = () => {
-        // send POST req 
+        api.insertProduct({
+            category,
+            productName,
+            price
+        }).then(() => {
+            toast("Succesfully added product!");
+        }).catch(() => {
+            toast.error("Cannot add product",{ });
+        })
         setCategory("Vegetable");
         setProductName("");
         setPrice(0);
-        toast("Succesfully added product!");
     }
     return (
         <div>
