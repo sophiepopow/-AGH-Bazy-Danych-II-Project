@@ -50,9 +50,9 @@ const updateCustomer = async (req, res) => {
                 message: 'Customer not found!',
             })
         }
-        customer.fistname = body.firstname
-        customer.surname = body.surname
-        customer.age = body.age
+        customer.auth.login = body.login
+        customer.auth.password = body.password
+        customer.role = body.role
         customer
             .save()
             .then(() => {
