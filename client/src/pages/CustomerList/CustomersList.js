@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import {ReactTable} from 'react-table'
 import api from '../../api'
-
+import {Grid} from "@mui/material";
 import styled from 'styled-components'
 
 
@@ -74,51 +73,12 @@ class CustomersList extends React.Component {
 
     render() {
         const { customers, isLoading } = this.state
-        console.log('TCL: CustomersList -> render -> customers', customers)
-
-        const columns = [
-            {
-                Header: 'ID',
-                accessor: '_id',
-                filterable: true,
-            },
-            {
-                Header: 'Firstname',
-                accessor: 'firstname',
-                filterable: true,
-            },
-            {
-                Header: 'Surname',
-                accessor: 'surname',
-                filterable: true,
-            },
-            {
-                Header: 'Age',
-                accessor: 'age',
-                filterable: true,
-            },
-        ]
-
-        let showTable = true
-        if (!customers.length) {
-            showTable = false
-        }
-        console.log(showTable)
-
+        console.log(customers)
         return (
             <Wrapper>
-                {customers.map(customer => <div>{customer.firstname}</div>)
-                // && (
-
-                    // <ReactTable
-                        // data={customers}
-                        // columns={columns}
-                        // loading={isLoading}
-                        // defaultPageSize={10}
-                        // showPageSizeOptions={true}
-                        // minRows={0}
-                //     // />
-                // )
+                {customers.map(customer =>
+                <Grid key="customer._id">{customer.auth.login} {customer.role}</Grid>
+                )
             }
             </Wrapper>
         )

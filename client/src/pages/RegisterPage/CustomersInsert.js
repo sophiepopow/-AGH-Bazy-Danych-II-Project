@@ -42,70 +42,61 @@ class CustomersInsert extends Component {
         super(props)
 
         this.state = {
-            firstname: '',
-            surname: '',
-            age: '',
+            login: '',
+            password: '',
+            role:'user'
         }
     }
 
-    handleChangeInputName = async event => {
-        const firstname = event.target.value
-        this.setState({ firstname })
+    handleChangeInputLogin = async event => {
+        const login = event.target.value
+        this.setState({ login })
     }
 
-    handleChangeInputSurname = async event => {
-        const surname = event.target.validity.valid
+    handleChangeInputPassword = async event => {
+        const password = event.target.validity.valid
             ? event.target.value
-            : this.state.surname
+            : this.state.password
 
-        this.setState({ surname })
+        this.setState({ password })
     }
 
-    handleChangeInputAge = async event => {
-        const age = event.target.value
-        this.setState({ age })
-    }
+
 
     handleIncludeCustomer = async () => {
-        const { firstname, surname, age } = this.state
-        const payload = { firstname, surname, age }
+        const { login, password, role } = this.state
+        const payload = { auth:{login, password}, role }
 
         await api.insertCustomer(payload).then(res => {
             window.alert(`Customer inserted successfully`)
             this.setState({
-                firstname: '',
-                surname: '',
-                age: '',
+                login: '',
+                password: '',
+                role:'user'
             })
         })
     }
 
     render() {
-        const { firstname, surname, age } = this.state
+        const { login, password, role } = this.state
         return (
             <Wrapper>
                 <Title>Create Customer</Title>
 
-                <Label>Firstname: </Label>
+                <Label>Login: </Label>
                 <InputText
                     type="text"
-                    value={firstname}
-                    onChange={this.handleChangeInputName}
+                    value={login}
+                    onChange={this.handleChangeInputLogin}
                 />
 
-                <Label>Surname: </Label>
+                <Label>Password: </Label>
                 <InputText
                     type="text"
-                    value={surname}
-                    onChange={this.handleChangeInputSurname}
+                    value={password}
+                    onChange={this.handleChangeInputPassword}
                 />
 
-                <Label>Age: </Label>
-                <InputText
-                    type="number"
-                    value={age}
-                    onChange={this.handleChangeInputAge}
-                />
 
                 <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Add Customer</Button>
                 <Button variant="contained" color="secondary" >Cancel</Button>

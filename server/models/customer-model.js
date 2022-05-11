@@ -3,9 +3,8 @@ const Schema = mongoose.Schema
 
 const Customer = new Schema(
     {
-        firstname: { type: String, required: true},
-        surname: { type: String, required: true },
-        age: { type: Number, required: true },
+        auth:{login:String,password:String},
+        role:String
     },
     { timestamps: true },
 )
