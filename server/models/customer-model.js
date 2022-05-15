@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const Customer = new Schema(
     {
         auth:{login:String,password:String},
-        role:String
+        name:String,
+        transactions: [Schema.Types.ObjectId]
     },
     { timestamps: true },
 )

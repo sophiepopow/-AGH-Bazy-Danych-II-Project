@@ -44,7 +44,8 @@ class CustomersInsert extends Component {
         this.state = {
             login: '',
             password: '',
-            role:'user'
+            name:'',
+            transactions:[]
         }
     }
 
@@ -61,28 +62,39 @@ class CustomersInsert extends Component {
         this.setState({ password })
     }
 
+    handleChangeInputName = async event => {
+        const name = event.target.value
+        this.setState({ name })
+    }
+
 
 
     handleIncludeCustomer = async () => {
-        const { login, password, role } = this.state
-        const payload = { auth:{login, password}, role }
+        const { login, password, name, transactions } = this.state
+        const payload = { auth:{login, password}, name, transactions }
 
         await api.insertCustomer(payload).then(res => {
             window.alert(`Customer inserted successfully`)
             this.setState({
                 login: '',
                 password: '',
-                role:'user'
+                name:'',
+                transactions:[]
             })
         })
     }
 
     render() {
-        const { login, password, role } = this.state
+        const { login, password, name, transactions } = this.state
         return (
             <Wrapper>
                 <Title>Create Customer</Title>
-
+                <Label>Username: </Label>
+                <InputText
+                    type="text"
+                    value={name}
+                    onChange={this.handleChangeInputName}
+                />
                 <Label>Login: </Label>
                 <InputText
                     type="text"
@@ -92,7 +104,7 @@ class CustomersInsert extends Component {
 
                 <Label>Password: </Label>
                 <InputText
-                    type="text"
+                    type="password"
                     value={password}
                     onChange={this.handleChangeInputPassword}
                 />

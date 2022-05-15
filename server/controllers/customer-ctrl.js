@@ -52,7 +52,7 @@ const updateCustomer = async (req, res) => {
         }
         customer.auth.login = body.login
         customer.auth.password = body.password
-        customer.role = body.role
+        customer.name = body.name
         customer
             .save()
             .then(() => {
