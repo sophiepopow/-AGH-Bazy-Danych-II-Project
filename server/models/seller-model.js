@@ -10,4 +10,4 @@ const Seller = new Schema(
     { timestamps: true },
 )
 
-module.exports = mongoose.model('customers', Customer)
+module.exports = mongoose.model('sellers', Seller)
