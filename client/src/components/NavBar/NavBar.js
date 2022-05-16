@@ -16,16 +16,16 @@ import styles from './NavBar.module.css';
 
 // mocked users roles
 // admin
-// const user =  {
-//   role: "admin",
-//   email: "admin@admin.com",
-//   name: "Jan",
-//   surname: "Kowalski",
-//   age: 18
-// }
+const user =  {
+  role: "admin",
+  email: "admin@admin.com",
+  name: "Jan",
+  surname: "Kowalski",
+  age: 18
+}
 
 // not logged in
-const user = undefined
+// const user = undefined
 
 // user but not admin
 // const user = {
