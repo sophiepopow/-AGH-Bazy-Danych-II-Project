@@ -1,39 +1,39 @@
-const Customer = require('../models/customer-model')
+const Seller = require('../models/seller-model')
 
-const createCustomer = (req, res) => {
+const createSeller = (req, res) => {
     const body = req.body
 
     if (!body) {
         return res.status(400).json({
             success: false,
-            error: 'You must provide a customer',
+            error: 'You must provide a seller',
         })
     }
 
-    const customer = new Customer(body)
+    const seller = new Seller(body)
 
-    if (!customer) {
+    if (!seller) {
         return res.status(400).json({ success: false, error: err })
     }
 
-    customer
+    seller
         .save()
         .then(() => {
             return res.status(201).json({
                 success: true,
-                id: customer._id,
-                message: 'Customer created!',
+                id: seller._id,
+                message: 'Seller created!',
             })
         })
         .catch(error => {
             return res.status(400).json({
                 error,
-                message: 'Customer not created!',
+                message: 'Seller not created!',
             })
         })
 }
 
-const updateCustomer = async (req, res) => {
+const updateSeller = async (req, res) => {
     const body = req.body
 
     if (!body) {
@@ -43,69 +43,69 @@ const updateCustomer = async (req, res) => {
         })
     }
 
-    Customer.findOne({ _id: req.params.id }, (err, customer) => {
+    Seller.findOne({ _id: req.params.id }, (err, seller) => {
         if (err) {
             return res.status(404).json({
                 err,
-                message: 'Customer not found!',
+                message: 'Seller not found!',
             })
         }
-        customer.auth.login = body.login
-        customer.auth.password = body.password
-        customer.name = body.name
-        customer
+        seller.auth.login = body.login
+        seller.auth.password = body.password
+        seller.name = body.name
+        seller
             .save()
             .then(() => {
                 return res.status(200).json({
                     success: true,
-                    id: customer._id,
-                    message: 'Customer updated!',
+                    id: seller_id,
+                    message: 'Seller updated!',
                 })
             })
             .catch(error => {
                 return res.status(404).json({
                     error,
-                    message: 'Customer not updated!',
+                    message: 'Seller not updated!',
                 })
             })
     })
 }
 
-const deleteCustomer = async (req, res) => {
-    await Customer.findOneAndDelete({ _id: req.params.id }, (err,customer) => {
+const deleteSeller = async (req, res) => {
+    await Seller.findOneAndDelete({ _id: req.params.id }, (err,seller) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!customer) {
+        if (!seller) {
             return res
                 .status(404)
-                .json({ success: false, error: `Customer not found` })
+                .json({ success: false, error: `Seller not found` })
         }
 
-        return res.status(200).json({ success: true, data: customer })
+        return res.status(200).json({ success: true, data: seller })
     }).catch(err => console.log(err))
 }
 
-const getCustomerById = async (req, res) => {
-    await Customer.findOne({ _id: req.params.id }, (err, customer) => {
+const getSellerById = async (req, res) => {
+    await Seller.findOne({ _id: req.params.id }, (err, seller) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!customer) {
+        if (!seller) {
             return res
                 .status(404)
-                .json({ success: false, error: `Customer not found` })
+                .json({ success: false, error: `Seller not found` })
         }
-        return res.status(200).json({ success: true, data: customer })
+        return res.status(200).json({ success: true, data: seller })
     }).catch(err => console.log(err))
 }
 
-const getCustomers = async (req, res) => {
+const getSellers = async (req, res) => {
     try {
-        const customers = await Customer.find({});
-        res.status(200).send({ success: true, data: customers });
+        const sellers = await Seller.find({});
+        res.status(200).send({ success: true, data: sellers });
     }
     catch(err){
         console.log(err);
@@ -114,9 +114,9 @@ const getCustomers = async (req, res) => {
 }
 
 module.exports = {
-    createCustomer,
-    updateCustomer,
-    deleteCustomer,
-    getCustomers,
-    getCustomerById
+    createSeller,
+    updateSeller,
+    deleteSeller,
+    getSellers,
+    getSellerById
 }

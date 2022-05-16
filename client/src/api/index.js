@@ -11,6 +11,13 @@ export const deleteCustomerById = id => api.delete(`/customer/${id}`)
 export const getCustomerById = id => api.get(`/customer/${id}`)
 
 
+export const insertSeller = payload => api.post(`/seller`, payload)
+export const getAllSellers = () => api.get(`/sellers`)
+export const updateSellerById = (id, payload) => api.put(`/seller/${id}`, payload)
+export const deleteSellerById = id => api.delete(`/seller/${id}`)
+export const getSellerById = id => api.get(`/seller/${id}`)
+
+
 export const insertProduct = payload => api.post(`/product`, payload)
 export const getAllProducts = () => api.get(`/products`)
 export const updateProductById = (id, payload) => api.put(`/product/${id}`, payload)
@@ -27,7 +34,12 @@ const apis = {
     getAllProducts,
     updateProductById,
     deleteProductById,
-    getProductById
+    getProductById,
+    insertSeller,
+    getAllSellers,
+    updateSellerById,
+    deleteSellerById,
+    getSellerById
 }
 
 export default apis
