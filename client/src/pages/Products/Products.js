@@ -47,6 +47,12 @@ const Products = () => {
                       <Typography variant="body2" color="text.secondary">
                           {item.price} PLN za kg
                       </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                         Ilość produktu: {item.count}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                         Sprzedawca: {item.shopName}
+                      </Typography>
                   </CardContent>
                   <CardActions>
                       <div className={styles.category}> {item.category}</div>
