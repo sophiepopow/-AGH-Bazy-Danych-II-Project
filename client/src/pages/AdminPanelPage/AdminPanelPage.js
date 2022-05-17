@@ -7,14 +7,19 @@ import { toast } from 'react-toastify';
 
 export const AdminPanelPage = () => {
     const [category, setCategory] = useState("Vegetable");
+    const [shopName, setShopName] = useState("Sklep Pani Basi");
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState(0);
+    const [count, setCount] = useState(0);
 
     const submitProduct = () => {
         api.insertProduct({
             category,
             productName,
-            price
+            price,
+            shopName,
+            count
+            
         }).then(() => {
             toast("Succesfully added product!");
         }).catch(() => {
@@ -22,7 +27,9 @@ export const AdminPanelPage = () => {
         })
         setCategory("Vegetable");
         setProductName("");
+        setShopName("Skep Pani Basi");
         setPrice(0);
+        setCount(0);
     }
     return (
         <div>
@@ -37,8 +44,10 @@ export const AdminPanelPage = () => {
                         label="Category"
                         onChange={(evt) => { setCategory(evt.target.value) }}
                     >
-                        <MenuItem value={"Vegetable"}>Veegtable</MenuItem>
-                        <MenuItem value={"Fruit"}>Fruit</MenuItem>
+                        <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
+                        <MenuItem value={"Fruit"}>Owoce</MenuItem>
+                        <MenuItem value={"Bio"}>Bio</MenuItem>
+                        <MenuItem value={"Mini"}>Mini</MenuItem>
                     </Select>
                     <TextField
                         id="outlined-basic"
@@ -54,6 +63,21 @@ export const AdminPanelPage = () => {
                         type="number"
                         value={price}
                         onChange={(evt) => { setPrice(evt.target.value) }}
+                        />
+                    <TextField
+                        id="outlined-basic"
+                        label="Shop name"
+                        variant="outlined"
+                        value={shopName}
+                        onChange={(evt) => { setShopName(evt.target.value) }}
+                        />
+                    <TextField 
+                        id="outlined-basic"
+                        label="Count"
+                        variant="outlined"
+                        type="number"
+                        value={count}
+                        onChange={(evt) => { setCount(evt.target.value) }}
                         />
                     <Button variant="contained" color="success" onClick={submitProduct}>Submit</Button>
                 </FormControl>
