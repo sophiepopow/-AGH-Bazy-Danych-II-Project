@@ -25,17 +25,46 @@ Zdecydowaliśmy się na powyższy stack technologiczny ze względu na popularno�
 - node version v14.19.1 recommended
 - npm version 6.14.16 recommended
 
-### Uruchomienie aplikacji frontendowej
-cd client <br />
-npm install <br />
-npm start // ON WINDOWS <br />
-npm run start-mac // ON LINUX <br />
-
+## Uruchomienie aplikacji frontendowej
+    cd client
+    npm install
+    npm start // ON WINDOWS
+    npm run start-mac // ON LINUX / MACOS
+    
+~~~
 appilcation starts on the port 8000
+~~~
 
-### Uruchomienie aplikacji backendowej
-cd server <br />
-npm install <br />
-npm start <br />
-
+## Uruchomienie aplikacji backendowej
+    cd server
+    npm install
+    npm start
+    
+~~~
 appilcation starts on the port 3000
+~~~
+
+# Baza Danych
+W bazie danych są 4 Kolekcje: User, Products, Transactions, Stores.
+
+1) User
+    TODO
+2) Products
+    ~~~json
+    {
+        "category": "Fruit",
+        "productName": "Gruszka",
+        "price": "8",
+        "shopName": "Sklep Pani Basi",
+        "count": "3"
+    }
+    ~~~
+    
+3) Transactions
+4) Stores 
+
+## Schemat Bazy Danych
+## API
+## Modele
+## Frontend
+### Produkty:
