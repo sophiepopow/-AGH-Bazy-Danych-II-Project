@@ -45,7 +45,82 @@ const getProducts = async (req, res) => {
     } 
 }
 
+
+
+const getProductsByShop = async (req, res) => {
+    try {
+        const products = await Product.find({shopName: req.params.shopName});
+
+        console.log(products);
+        res.status(200).send({ success: true, data: products });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send({ success: false, error: err });
+    }
+}
+
+
+const getProductsByCategory = async (req, res) => {
+    try {
+        const products = await Product.find({category: req.params.category});
+
+        console.log(products);
+        res.status(200).send({ success: true, data: products });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send({ success: false, error: err });
+    }
+}
+
+
+// const getProductsCheaperThan = async (req, res) => {
+//     try {
+//         const products = await Product.find({price: {$lt:req.params.price}});
+//
+//         console.log(products);
+//         res.status(200).send({ success: true, data: products });
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(400).send({ success: false, error: err });
+//     }
+// }
+//
+//
+// const getProductsMoreExpensiveThan = async (req, res) => {
+//     try {
+//         const products = await Product.find({price: {$gt:req.params.price}});
+//
+//         console.log(products);
+//         res.status(200).send({ success: true, data: products });
+//     }
+//     catch(err){
+//         console.log(err);
+//         res.status(400).send({ success: false, error: err });
+//     }
+// }
+
+
+const getProductByName = async (req, res) => {
+    try {
+        const products = await Product.find({productName: req.params.productName});
+
+        console.log(products);
+        res.status(200).send({ success: true, data: products });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send({ success: false, error: err });
+    }
+}
+
+
 module.exports = {
     createProduct,
-    getProducts
+    getProducts,
+    getProductsByShop,
+    getProductsByCategory,
+    getProductByName
 }

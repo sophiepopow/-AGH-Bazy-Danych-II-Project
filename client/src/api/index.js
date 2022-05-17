@@ -20,9 +20,13 @@ export const getSellerById = id => api.get(`/seller/${id}`)
 
 export const insertProduct = payload => api.post(`/product`, payload)
 export const getAllProducts = () => api.get(`/products`)
+export const getProductsByShop = (shopName) => api.get(`/products/${shopName}`)
+export const getProductsByCategory = (category) => api.get(`/products/${category}`)
+export const getProductByName = (productName) => api.get(`/product/${productName}`)
 export const updateProductById = (id, payload) => api.put(`/product/${id}`, payload)
 export const deleteProductById = id => api.delete(`/product/${id}`)
 export const getProductById = id => api.get(`/product/${id}`)
+
 
 const apis = {
     insertCustomer,
@@ -39,7 +43,10 @@ const apis = {
     getAllSellers,
     updateSellerById,
     deleteSellerById,
-    getSellerById
+    getSellerById,
+    getProductsByShop,
+    getProductByName,
+    getProductsByCategory
 }
 
 export default apis
