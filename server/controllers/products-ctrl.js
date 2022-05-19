@@ -1,5 +1,6 @@
 const Product = require('../models/product-model')
 
+
 const createProduct = (req, res) => {
     const body = req.body
 
@@ -35,8 +36,39 @@ const createProduct = (req, res) => {
 }
 
 const getProducts = async (req, res) => {
+    const match={}
+    const sort ={}
+
+    console.log(req.query);
+
+    if(req.query.sortBy){
+        const parts = req.query.sortBy.split('.')
+        sort[parts[0]] = parts[1]==='desc'? -1 : 1
+    }
+
+    if(req.query.productName){
+        match.productName = req.query.productName;
+    }
+
+    if(req.query.shopName){
+        match.shopName = req.query.shopName;
+    }
+
+    if(req.query.category){
+        match.category = req.query.category;
+    }
+
+    if(req.query.pricelte){
+        match.price = {$lte:req.query.pricelte};
+    }
+
+    if(req.query.pricegte){
+        match.price = {$gte:req.query.pricegte};
+    }
+
     try {
-        const products = await Product.find({});
+        const products = await Product.find(match).sort(sort);
+
         res.status(200).send({ success: true, data: products });
     }
     catch(err){
@@ -44,6 +76,8 @@ const getProducts = async (req, res) => {
         res.status(400).send({ success: false, error: err });
     } 
 }
+
+
 
 module.exports = {
     createProduct,

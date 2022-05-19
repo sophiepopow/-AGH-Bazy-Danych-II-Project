@@ -7,5 +7,4 @@ router.post('/product', ProductCtrl.createProduct)
 // router.delete('/product/:id', ProductCtrl.deleteCustomer)
 // router.get('/product/:id', ProductCtrl.getCustomerById)
 router.get('/products', ProductCtrl.getProducts)
-
 module.exports = router
