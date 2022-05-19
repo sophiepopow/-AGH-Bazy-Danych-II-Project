@@ -19,7 +19,7 @@ export const getSellerById = id => api.get(`/seller/${id}`)
 
 
 export const insertProduct = payload => api.post(`/product`, payload)
-export const getAllProducts = () => api.get(`/products`)
+export const getAllProducts = (params) => api.get(`/products/`, { params })
 export const updateProductById = (id, payload) => api.put(`/product/${id}`, payload)
 export const deleteProductById = id => api.delete(`/product/${id}`)
 export const getProductById = id => api.get(`/product/${id}`)

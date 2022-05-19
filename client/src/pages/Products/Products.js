@@ -13,9 +13,17 @@ import { toast } from 'react-toastify';
 // productList db get items
 const Products = () => {
     const [productsList, setProductList] = useState([]);
-
     useEffect(() => {
-        api.getAllProducts()
+        // sortBy to moze być narazie tytlko price.desc lub price.asc bo product nie ma w schema ratingu
+        // jesli chcemy price <= 10 lub inna wartość to zapsiujemy jak ponizej
+        // analogicznie z >=, ostrych nierówności jeszcze nie zaczai bo jstm w trakcie ogarniania jak to lepiej zrobic
+        // w product-ctrl.js w ifach mozecie zobaczyc jakie parametry "umie" zczytać jak narazie, nie wszystkie muszą mieć
+        // podane wartości ponizej, dowolna kombinacja działą
+        // paramsy trzeba będzie pobierać I guess handlerami gdy ktos zaznaczy jakis filtr etc etc
+
+        const params = new URLSearchParams([['sortBy', 'price.asc'],['pricelte', 10]]);
+
+        api.getAllProducts(params)
         .then((products) => {
             setProductList(products.data.data)
         })
