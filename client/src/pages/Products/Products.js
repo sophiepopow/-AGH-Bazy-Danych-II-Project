@@ -1,125 +1,108 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './Products.module.css';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import {Grid} from "@mui/material";
-import api from '../../api';
-import { toast } from 'react-toastify';
+import {Grid, Typography, FormControl, InputLabel, Select, MenuItem, TextField} from '@mui/material';
+import {toast} from 'react-toastify';
+import api from "../../api";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
-// productList db get items
+
 const Products = () => {
     const [productsList, setProductList] = useState([]);
-    const [queryType, setQueryType] = useState("sortBy");
-    const [queryDetails, setQueryDetails] = useState("price.asc");
-    const [sortType, setSortType] = useState("price.asc");
-    const [categoryType, setCategoryType] = useState("");
-
-    const submitSort = () => {
-        // TODO
-    }
+    const [sortType, setSortType] = useState();
+    const [categoryType, setCategoryType] = useState();
+    const [shopName, setShopName] = useState();
 
     useEffect(() => {
-        // sortBy to moze być narazie tytlko price.desc lub price.asc bo product nie ma w schema ratingu
-        // jesli chcemy price <= 10 lub inna wartość to zapsiujemy jak ponizej
-        // analogicznie z >=, ostrych nierówności jeszcze nie zaczai bo jstm w trakcie ogarniania jak to lepiej zrobic
-        // w product-ctrl.js w ifach mozecie zobaczyc jakie parametry "umie" zczytać jak narazie, nie wszystkie muszą mieć
-        // podane wartości ponizej, dowolna kombinacja działą
-        // paramsy trzeba będzie pobierać I guess handlerami gdy ktos zaznaczy jakis filtr etc etc
+        let paramsToBe = [];
+        if (sortType) {
+            paramsToBe = [...paramsToBe, ["sortBy", sortType]]
+        }
+        if (categoryType) {
+            paramsToBe = [...paramsToBe, ["category", categoryType]]
+        }
+        if (categoryType) {
+            paramsToBe = [...paramsToBe, ["shopName", shopName]]
+        }
 
-        const params = new URLSearchParams([[queryType, queryDetails],['pricelte', 10]]);
-        console.log("queryType: " + queryType + " queryDetails: " + queryDetails);
+        const params = new URLSearchParams(paramsToBe);
 
         api.getAllProducts(params)
-        .then((products) => {
-            setProductList(products.data.data)
-            console.log("filtry!")
-            console
-        })
-        .catch((e) => {
-            console.log(e)
-            toast.error("Cannot load the products :c")
-        })
-    }, [queryDetails, queryType]);
+            .then((products) => {
+                setProductList(products.data.data)
+            })
+            .catch((e) => {
+                console.log(e)
+                toast.error("Cannot load the products :c")
+            })
+    });
 
-  return <div className={styles.Products}>
-      <Typography variant="h2" padding={5}>
-          Produkty w naszym sklepie:
-          
-      </Typography>
-      <div>
-        <FormControl>
-            <InputLabel id="sort-label">Sortuj</InputLabel>
-            <Select
-                labelId="sort-label"
-                id="sort-label-select"
-                value={sortType}
-                label="Sortuj"
-                onChange={(evt) => { setQueryDetails(evt.target.value); setQueryType("sortBy");}}>
+    return (<div>
+        <Typography variant="h2" padding={5}>
+            Produkty w naszym sklepie:
+        </Typography>
+
+        <div className={styles.filtersContainer}>
+            <FormControl className={styles.filters}>
+                <InputLabel id="sort-label">Sortuj</InputLabel>
+                <Select
+                    labelId="sort-label"
+                    id="sort-label-select"
+                    value={sortType}
+                    label="Sortuj"
+                    onChange={(evt) => {
+                        setSortType(evt.target.value)
+                    }}>
+                    <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
+                    <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
+                </Select>
+            </FormControl>
+            <FormControl className={styles.filters}>
+                <InputLabel id="sort-label">Kategoria</InputLabel>
+                <Select
+                    labelId="category-label"
+                    id="category-label-select"
+                    value={categoryType}
+                    label="Kategoria"
+                    onChange={(evt) => {
+                        setCategoryType(evt.target.value)
+                    }}>
+                    <MenuItem value={""}>Wszystko</MenuItem>
+                    <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
+                    <MenuItem value={"Fruit"}>Owoce</MenuItem>
+                    <MenuItem value={"Bio"}>Bio</MenuItem>
+                    <MenuItem value={"Mini"}>Mini</MenuItem>
+                </Select>
+            </FormControl >
+            <FormControl className={styles.filters}>
+            <InputLabel id="shopName-label">Nazwa Sklepu</InputLabel>
+            <TextField
+                labelId="shopName-label"
+                id="shopName-label-text"
+                value={shopName}
+                label="Nazwa Sklepu"
+                onChange={(evt) => {
+                    setShopName(evt.target.value)
+                }}>
                 <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
                 <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
-            </Select>
-        </FormControl>
-        <FormControl>
-            <InputLabel id="sort-label">Kategoria</InputLabel>
-            <Select
-                labelId="category-label"
-                id="category-label-select"
-                value={categoryType}
-                label="Kategoria"
-                onChange={(evt) => { setQueryDetails(evt.target.value); setQueryType("category");}}>
-                <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
-                <MenuItem value={"Fruit"}>Owoce</MenuItem>
-                <MenuItem value={"Bio"}>Bio</MenuItem>
-                <MenuItem value={"Mini"}>Mini</MenuItem>
-            </Select>
-            
-        </FormControl>
-      </div>
-      <Grid container  spacing={7} justifyContent={"center"} padding={10} sx={{ display: 'flex' }}>
+            </TextField>
+            </FormControl>
+        </div>
+        {!productsList.length?<Typography variant="h4" padding={5}>
+            Brak pasujących produktów  😥
+            </Typography> :
+        <Grid container spacing={7} justifyContent={"center"} padding={10} sx={{display: 'flex'}}>
 
-          {productsList.map((item)=>{
-              return <Grid item sx={{ flexDirection: 'row' }}  xs={6} sm={4} md={3} key={item._id} minWidth={300}
-                           ><Card >
-                  <CardMedia
-                      component="img"
-                      image="https://www.mobilny-warzywniak.pl/assets/slider/30-6d42b60daf731ed0a78b5076533f4a37ba00c020bcf75a23e5ce3722587504e4.jpg"
-                      
-                  />
-                  <CardContent>
-                      <Typography gutterBottom variant="h4" component="div">
-                          {item.productName}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                          {item.price} PLN za kg
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                         Ilość produktu: {item.count}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                         Sprzedawca: {item.shopName}
-                      </Typography>
-                  </CardContent>
-                  <CardActions className={styles.container}>
-                      <div className={styles.category}> {item.category}</div>
-                      <Button size="small">Kupuję!</Button>
-                  </CardActions>
-                  <CardActions>
-                      <Button className={styles.reviewButton}> Oceń produkt! </Button>
-
-                  </CardActions>
-              </Card></Grid>
-          })}
+            {productsList.map((item) => {
+                return <Grid item sx={{flexDirection: 'row'}} xs={6} sm={4} md={3} key={item._id} minWidth={300}>
+                    <ProductCard item={item}/>
+                </Grid>
+            })}
 
 
+        </Grid>}
 
-      </Grid>
-
-  </div>
+    </div>)
 };
 
 Products.propTypes = {};
