@@ -8,6 +8,7 @@ const Product = new Schema(
         category: { type: String, required: true },
         price: { type: Number, required: true },
         shopName: {type: String, required: true },
+        uid: { type: Number, required: true },
         reviews: [{type: Review, required: false}],
         count:  {type: Number, required: true }
     },

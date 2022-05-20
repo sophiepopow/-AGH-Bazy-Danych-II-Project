@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 export const AdminPanelPage = () => {
-    const [category, setCategory] = useState("Vegetable");
+    const [category, setCategory] = useState("Warzywa");
     const [shopName, setShopName] = useState("Sklep Pani Basi");
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState(0);
@@ -25,7 +25,7 @@ export const AdminPanelPage = () => {
         }).catch(() => {
             toast.error("Cannot add product",{ });
         })
-        setCategory("Vegetable");
+        setCategory("Warzywa");
         setProductName("");
         setShopName("Skep Pani Basi");
         setPrice(0);
@@ -44,8 +44,8 @@ export const AdminPanelPage = () => {
                         label="Category"
                         onChange={(evt) => { setCategory(evt.target.value) }}
                     >
-                        <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
-                        <MenuItem value={"Fruit"}>Owoce</MenuItem>
+                        <MenuItem value={"Warzywa"}>Warzywa</MenuItem>
+                        <MenuItem value={"Owoce"}>Owoce</MenuItem>
                         <MenuItem value={"Bio"}>Bio</MenuItem>
                         <MenuItem value={"Mini"}>Mini</MenuItem>
                     </Select>
