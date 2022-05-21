@@ -1,0 +1,21 @@
+.category {
+    border-radius: 10px;
+    /* margin-right: 25%; */
+    color: white;
+    padding: 2px 10px;
+    background-color: forestgreen;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 0 50px;
+}
+
+.reviewButton {
+    display: flex;
+    justify-self: center;
+
+}
