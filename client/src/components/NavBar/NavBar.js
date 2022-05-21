@@ -39,7 +39,7 @@ const user =  {
 const showAlways = () => true
 const isNotLoggedIn = (user) => !user;
 const isLoggedIn = (user) => user;
-const isAdmin = (user) => user && user.role == "admin";
+const isAdmin = (user) => user && user.role === "admin";
 
 const pages = ['Login', 'Register', 'Products', 'Admin Panel', 'Stores', "Customer List", 'logout'];
 const showPanelCondition = [
@@ -51,6 +51,7 @@ const showPanelCondition = [
   isAdmin,
   isLoggedIn
 ]
+
 const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/customers/list', '/logout'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -59,16 +60,16 @@ const ResponsiveAppBar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
 
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
@@ -86,7 +87,7 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            <img src="logo.png" className={styles.logo}/>
+            <img src={"logo.png"} className={styles.logo} alt={'logo'}/>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -118,8 +119,11 @@ const ResponsiveAppBar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+              {pages.map((page, i) => (
+                <MenuItem key={page} onClick={() => {
+                  navigate(pagesLinks[i]);
+                  handleCloseNavMenu();
+                }}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -131,9 +135,9 @@ const ResponsiveAppBar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            <img src={"logo.png"} className={styles.logoSmall} alt=""/>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} >
             {pages.map((page, i) => (
               <>
                {showPanelCondition[i](user) && <Button
@@ -173,7 +177,7 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting, i) => (
+              {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
