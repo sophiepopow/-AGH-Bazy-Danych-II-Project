@@ -4,25 +4,35 @@ import {Grid, Typography, FormControl, InputLabel, Select, MenuItem, TextField} 
 import {toast} from 'react-toastify';
 import api from "../../api";
 import ProductCard from "../../components/ProductCard/ProductCard";
-
+import {useLocation} from "react-router-dom";
 
 const Products = () => {
+    const location = useLocation();
+    let initStore =''
+    console.log(location)
+    if(location.state){
+        initStore = location.state.shopName
+    }
+
     const [productsList, setProductList] = useState([]);
     const [sortType, setSortType] = useState();
-    const [categoryType, setCategoryType] = useState();
-    const [shopName, setShopName] = useState();
+    const [categoryType, setCategoryType] = useState( ``);
+    const [shopName, setShopName] = useState(initStore);
 
     useEffect(() => {
         let paramsToBe = [];
+
         if (sortType) {
             paramsToBe = [...paramsToBe, ["sortBy", sortType]]
         }
         if (categoryType) {
             paramsToBe = [...paramsToBe, ["category", categoryType]]
         }
-        if (categoryType) {
+        if (shopName) {
             paramsToBe = [...paramsToBe, ["shopName", shopName]]
         }
+
+        console.log(paramsToBe);
 
         const params = new URLSearchParams(paramsToBe);
 
@@ -34,7 +44,7 @@ const Products = () => {
                 console.log(e)
                 toast.error("Cannot load the products :c")
             })
-    });
+    }, [shopName, categoryType, sortType]);
 
     return (<div>
         <Typography variant="h2" padding={5}>
@@ -66,7 +76,7 @@ const Products = () => {
                     onChange={(evt) => {
                         setCategoryType(evt.target.value)
                     }}>
-                    <MenuItem value={""}>Wszystko</MenuItem>
+                    <MenuItem value={ ``}>Wszystko</MenuItem>
                     <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
                     <MenuItem value={"Fruit"}>Owoce</MenuItem>
                     <MenuItem value={"Bio"}>Bio</MenuItem>
@@ -74,7 +84,7 @@ const Products = () => {
                 </Select>
             </FormControl >
             <FormControl className={styles.filters}>
-            <InputLabel id="shopName-label">Nazwa Sklepu</InputLabel>
+            <InputLabel id="shopName-label"> </InputLabel>
             <TextField
                 labelId="shopName-label"
                 id="shopName-label-text"

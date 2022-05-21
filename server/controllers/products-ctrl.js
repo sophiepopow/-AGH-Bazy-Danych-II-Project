@@ -38,9 +38,7 @@ const createProduct = (req, res) => {
 const getProducts = async (req, res) => {
     const match={}
     const sort ={}
-
-    console.log(req.query);
-
+    console.log(req)
     if(req.query.sortBy){
         const parts = req.query.sortBy.split('.')
         sort[parts[0]] = parts[1]==='desc'? -1 : 1
@@ -65,10 +63,10 @@ const getProducts = async (req, res) => {
     if(req.query.pricegte){
         match.price = {$gte:req.query.pricegte};
     }
-
+    console.log(match)
     try {
         const products = await Product.find(match).sort(sort);
-
+        //console.log(products)
         res.status(200).send({ success: true, data: products });
     }
     catch(err){
@@ -76,8 +74,6 @@ const getProducts = async (req, res) => {
         res.status(400).send({ success: false, error: err });
     } 
 }
-
-
 
 module.exports = {
     createProduct,
