@@ -13,19 +13,20 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router-dom';
 import styles from './NavBar.module.css';
+import jwt from 'jsonwebtoken'
 
 // mocked users roles
 // admin
-const user =  {
-  role: "admin",
-  email: "admin@admin.com",
-  name: "Jan",
-  surname: "Kowalski",
-  age: 18
-}
+// const user =  {
+//   role: "admin",
+//   email: "admin@admin.com",
+//   name: "Jan",
+//   surname: "Kowalski",
+//   age: 18
+// }
 
 // not logged in
-// const user = undefined
+const user = undefined
 
 // user but not admin
 // const user = {
@@ -41,7 +42,7 @@ const isNotLoggedIn = (user) => !user;
 const isLoggedIn = (user) => user;
 const isAdmin = (user) => user && user.role === "admin";
 
-const pages = ['Login', 'Register', 'Products', 'Admin Panel', 'Stores', "Customer List", 'logout'];
+const pages = ['Login', 'Register', 'Products', 'Admin Panel', 'Stores', "Customer List"];
 const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,
@@ -52,10 +53,23 @@ const showPanelCondition = [
   isLoggedIn
 ]
 
-const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/customers/list', '/logout'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/customers/list'];
+const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
+  
+  React.useEffect(()=>{
+    const token = localStorage.getItem('token')
+    if(token){
+      const data = jwt.decode(token)
+      setUser(data);
+      if (!data){
+        localStorage.removeItem('token')
+      }
+    }
+  },[])
+
+  const [user, setUser] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
@@ -74,6 +88,12 @@ const ResponsiveAppBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    setUser(undefined)
+    window.location.href = '/login'
   };
 
   return (
@@ -155,7 +175,7 @@ const ResponsiveAppBar = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {isLoggedIn(user) && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -178,12 +198,13 @@ const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={handleLogout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+          }
         </Toolbar>
       </Container>
     </AppBar>

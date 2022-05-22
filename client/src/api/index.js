@@ -9,7 +9,8 @@ export const getAllCustomers = () => api.get(`/customers`)
 export const updateCustomerById = (id, payload) => api.put(`/customer/${id}`, payload)
 export const deleteCustomerById = id => api.delete(`/customer/${id}`)
 export const getCustomerById = id => api.get(`/customer/${id}`)
-
+export const loginCustomer = payload => api.post(`/customerlogin`, payload)
+export const getLoggedCustomer = () => api.get(`/customerlogin`)
 
 export const insertSeller = payload => api.post(`/seller`, payload)
 export const getAllSellers = () => api.get(`/sellers`)
@@ -39,7 +40,9 @@ const apis = {
     getAllSellers,
     updateSellerById,
     deleteSellerById,
-    getSellerById
+    getSellerById,
+    loginCustomer,
+    getLoggedCustomer
 }
 
 export default apis
