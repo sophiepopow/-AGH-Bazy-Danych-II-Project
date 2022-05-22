@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import api from '../../api'
 import Button from '@mui/material/Button';
@@ -52,7 +51,6 @@ class UserInsert extends Component {
 
     handleChange = e => {
         const { value } = e.target;
-    
         this.setState({
           role: value
         });

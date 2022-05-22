@@ -1,4 +1,6 @@
+const { json } = require('body-parser')
 const Customer = require('../models/customer-model')
+const jwt = require('jsonwebtoken')
 
 const createCustomer = (req, res) => {
     const body = req.body
@@ -113,10 +115,46 @@ const getCustomers = async (req, res) => {
     } 
 }
 
+const loginCustomer = async (req, res) => {
+    const {login, password} = req.body.auth;
+    await Customer.findOne({auth:{login:login, password:password}}, (err, customer)=>{
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!customer) {
+            console.log("xd")
+            return res
+                .status(200)
+                .json({ success: false, error: `Customer not found` })
+        }
+        const token = jwt.sign({
+            name: customer.name,
+            id: customer._id
+        }, 'secret123')
+        return res.status(200).json({ success: true, data: token })
+    }).catch(err => console.log(err))
+}
+
+// const getLoggedCustomer = async (req, res) => {
+//     const token = req.headers['x-access-token']
+//     try {
+// 		const decoded = jwt.verify(token, 'secret123')
+// 		const name = decoded.name
+// 		const user = await Customer.findOne({ email: email })
+
+// 		return res.json({ status: 'ok', customer: user })
+// 	} catch (error) {
+// 		console.log(error)
+// 		res.json({ status: 'error', error: 'invalid token' })
+// 	}
+// }
+
+
 module.exports = {
     createCustomer,
     updateCustomer,
     deleteCustomer,
     getCustomers,
-    getCustomerById
+    getCustomerById,
+    loginCustomer
 }

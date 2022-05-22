@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import api from '../../api'
 
 function Copyright(props) {
     return (
@@ -29,13 +30,19 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            login: data.get('login'),
-            password: data.get('password'),
-        });
+        const payload = { auth:{login:data.get('login'), password:data.get('password')}}
+        await api.loginCustomer(payload).then(res => {
+            if (res.data.data){
+                window.alert(`Customer logged successfully`)
+                window.location.href = '/products'
+                localStorage.setItem('token', res.data.data)
+            } else {
+                window.alert("Wrong login data")
+            }
+        })
     };
 
     return (
@@ -113,7 +120,6 @@ export default function SignInSide() {
                                     </Link>
                                 </Grid>
                             </Grid>
-                            <Copyright sx={{ mt: 5 }} />
                         </Box>
                     </Box>
                 </Grid>
