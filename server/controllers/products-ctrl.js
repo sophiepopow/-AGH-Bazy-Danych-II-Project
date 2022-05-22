@@ -49,7 +49,7 @@ const getProducts = async (req, res) => {
     }
 
     if(req.query.shopName){
-        match.shopName = req.query.shopName;
+        match.shopName = { $regex: req.query.shopName};
     }
 
     if(req.query.category){

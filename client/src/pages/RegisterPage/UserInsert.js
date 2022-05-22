@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Box from '@mui/material/Box';
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Title = styled.h1.attrs({
     className: 'h1',
@@ -45,8 +47,10 @@ class UserInsert extends Component {
             password: '',
             name:'',
             transactions:[],
-            rating:null
+            rating:null,
         }
+
+        this.props = props;
     }
 
     handleChange = e => {
@@ -81,13 +85,14 @@ class UserInsert extends Component {
         const payload = { auth:{login, password}, name, transactions }
 
         await api.insertCustomer(payload).then(res => {
-            window.alert(`Customer inserted successfully`)
             this.setState({
                 login: '',
                 password: '',
                 name:'',
                 transactions:[]
             })
+            this.props.navigate('/login');
+            toast(`Customer inserted successfully`)
         })
     }
 
@@ -97,13 +102,14 @@ class UserInsert extends Component {
         const payload = { auth:{login, password}, name, rating }
 
         await api.insertSeller(payload).then(res => {
-            window.alert(`Seller inserted successfully`)
             this.setState({
                 login: '',
                 password: '',
                 name:'',
                 rating:null
             })
+            this.props.navigate('/login');
+            toast(`Seller inserted successfully`);
         })
     }
 
@@ -145,8 +151,8 @@ class UserInsert extends Component {
                     </FormControl>
                     <Box>
                         { role == "customer"
-                            ? <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Add Customer</Button>
-                            : <Button variant="contained" color="primary" onClick={this.handleIncludeSeller}>Add Seller</Button>
+                            ? <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Register as Customer</Button>
+                            : <Button variant="contained" color="primary" onClick={this.handleIncludeSeller}>Register as Seller</Button>
                         }
                         <Button variant="contained" color="secondary" >Cancel</Button>
                     </Box>
@@ -156,4 +162,8 @@ class UserInsert extends Component {
     }
 }
 
-export default UserInsert
+const UserInsertContainer = (props) => {
+    const navigate = useNavigate();
+    return <UserInsert {...props} navigate={navigate} />
+}
+export default UserInsertContainer
