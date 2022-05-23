@@ -1,11 +1,10 @@
-import styles from './AdminPanelPage.module.css';
 import api from '../../api'
 import Button from '@mui/material/Button';
 import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-export const AdminPanelPage = () => {
+export const AddProductPage = () => {
     const [category, setCategory] = useState("Warzywa");
     const [shopName, setShopName] = useState("Sklep Pani Basi");
     const [productName, setProductName] = useState("");

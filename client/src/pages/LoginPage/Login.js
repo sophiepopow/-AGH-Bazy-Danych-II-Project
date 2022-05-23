@@ -71,21 +71,6 @@ export default function SignInSide() {
         }
     };
 
-    // const handleSeller = async (event) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     const payload = { auth:{login:data.get('login'), password:data.get('password')}}
-    //     await api.loginSeller(payload).then(res => {
-    //         if (res.data.data){
-    //             window.alert(`Customer logged successfully`)
-    //             window.location.href = '/products'
-    //             localStorage.setItem('token', res.data.data)
-    //         } else {
-    //             window.alert("Wrong login data")
-    //         }
-    //     })
-    // };
-
     return (
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{ height: '100vh' }}>

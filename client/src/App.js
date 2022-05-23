@@ -10,7 +10,7 @@ import CustomersList from './pages/CustomerList/CustomersList'
 import UserInsert from './pages/RegisterPage/UserInsert'
 import CustomersUpdate from './pages/CustomerUpdate/CustomersUpdate'
 import LoginPage from './pages/LoginPage/Login'
-import { AdminPanelPage } from './pages/AdminPanelPage/AdminPanelPage'
+import { AddProductPage } from './pages/AddProductPage/AddProductPage'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,7 +25,7 @@ export const App = () => {
                 <Route path="/products" element={<Products />} />
                 <Route path="/stores" element={<Stores />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/admin" element={<AdminPanelPage />} />
+                <Route path="/addproduct" element={<AddProductPage />} />
             </Routes>
         </Router>
     )
