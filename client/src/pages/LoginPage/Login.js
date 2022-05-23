@@ -4,6 +4,8 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -27,23 +29,62 @@ function Copyright(props) {
     );
 }
 
+
 const theme = createTheme();
 
+
+
 export default function SignInSide() {
-    const handleSubmit = async (event) => {
+
+    const [user, setUser] = React.useState('customer');
+
+    const handleChange = e => {
+        const { value } = e.target;
+        setUser(value);
+      };
+
+    const handleCustomer = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const payload = { auth:{login:data.get('login'), password:data.get('password')}}
-        await api.loginCustomer(payload).then(res => {
-            if (res.data.data){
-                window.alert(`Customer logged successfully`)
-                window.location.href = '/products'
-                localStorage.setItem('token', res.data.data)
-            } else {
-                window.alert("Wrong login data")
-            }
-        })
+        if (user == 'customer'){
+            await api.loginCustomer(payload).then(res => {
+                if (res.data.data){
+                    window.alert(`Customer logged successfully`)
+                    window.location.href = '/products'
+                    localStorage.setItem('token', res.data.data)
+                } else {
+                    window.alert("Wrong login data")
+                }
+            })
+        }
+        else{
+            await api.loginSeller(payload).then(res => {
+                if (res.data.data){
+                    window.alert(`Customer logged successfully`)
+                    window.location.href = '/products'
+                    localStorage.setItem('token', res.data.data)
+                } else {
+                    window.alert("Wrong login data")
+                }
+            })
+        }
     };
+
+    // const handleSeller = async (event) => {
+    //     event.preventDefault();
+    //     const data = new FormData(event.currentTarget);
+    //     const payload = { auth:{login:data.get('login'), password:data.get('password')}}
+    //     await api.loginSeller(payload).then(res => {
+    //         if (res.data.data){
+    //             window.alert(`Customer logged successfully`)
+    //             window.location.href = '/products'
+    //             localStorage.setItem('token', res.data.data)
+    //         } else {
+    //             window.alert("Wrong login data")
+    //         }
+    //     })
+    // };
 
     return (
         <ThemeProvider theme={theme}>
@@ -79,7 +120,7 @@ export default function SignInSide() {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <Box component="form" noValidate onSubmit={handleCustomer} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
@@ -100,10 +141,14 @@ export default function SignInSide() {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            />
+                            <RadioGroup
+                                aria-labelledby="radio"
+                                defaultValue='customer'
+                                name="radio-buttons-group"
+                            >
+                            <FormControlLabel value="customer" onChange={handleChange} control={<Radio />} label="Customer" />
+                            <FormControlLabel value="seller" onChange={handleChange} control={<Radio />} label="Seller" />
+                            </RadioGroup>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -115,7 +160,7 @@ export default function SignInSide() {
                             <Grid container>
 
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/register" variant="body2">
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

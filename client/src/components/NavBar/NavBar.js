@@ -25,17 +25,6 @@ import jwt from 'jsonwebtoken'
 //   age: 18
 // }
 
-// not logged in
-const user = undefined
-
-// user but not admin
-// const user = {
-//     role: "customer",
-//     email: "admin@admin.com",
-//     name: "Jan",
-//     surname: "Kowalski",
-//     age: 18
-//   }
 
 const showAlways = () => true
 const isNotLoggedIn = (user) => !user;
@@ -57,6 +46,8 @@ const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/cu
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
+
+  const [user, setUser] = React.useState(null);
   
   React.useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -69,7 +60,7 @@ const ResponsiveAppBar = () => {
     }
   },[])
 
-  const [user, setUser] = React.useState(null);
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
