@@ -15,8 +15,9 @@ const mapItemReviesToUser = (item) => {
 }
 
 const ProductCard = ({item}) => {
+    console.log(item.reviews)
     const [review, setReview] = useState(mapItemReviesToUser(item));
-
+    const avgRating = item.reviews.reduce((total, next) => total + next.stars, 0) / ((item.reviews.length > 0) ? item.reviews.length : 1);
     const updateReview = (rating) => {
         let prevRev = review;
         setReview(rating);
@@ -50,12 +51,23 @@ const ProductCard = ({item}) => {
             <Typography variant="body2" color="text.secondary">
                 Sprzedawca: {item.shopName}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+                Ocena: {avgRating}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+                Ilość ocen: {item.reviews.length}
+            </Typography>
         </CardContent>
         <CardActions className={styles.container}>
             <div className={styles.category}> {item.category}</div>
             <Button className={styles.buyButton} size="small">Kupuję!</Button>
         </CardActions>
+
+
         <CardActions>
+            <Typography gutterBottom variant="h8">
+                Moja ocena:
+            </Typography>
                 <Rating
                 className={styles.rating}
                 name="simple-controlled"
