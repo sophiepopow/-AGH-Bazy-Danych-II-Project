@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styles from './ProductCard.module.css';
 import {Button, Card, CardActions, CardContent, CardMedia, Rating, Typography} from "@mui/material";
 import api from '../../api';
@@ -7,8 +7,10 @@ import jwt from 'jsonwebtoken'
 
 const mapItemReviesToUser = (item) => {
     const user = jwt.decode(localStorage.getItem('token'));
-    let opinion = item.reviews.filter(p => p.user == user.id);
-    if(opinion.length !== 0) return opinion[0].stars;
+    if(user) {
+        let opinion = item.reviews.filter(p => p.user === user.id);
+        if (opinion.length !== 0) return opinion[0].stars;
+    }
     return 0;
 }
 
@@ -54,7 +56,6 @@ const ProductCard = ({item}) => {
             <Button className={styles.buyButton} size="small">Kupuję!</Button>
         </CardActions>
         <CardActions>
-            <Typography component="legend"></Typography>
                 <Rating
                 className={styles.rating}
                 name="simple-controlled"
