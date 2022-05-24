@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Review = new Schema({user: Number, date: Date, stars: Number, text: {type: String, required: false}})
+const Review = new Schema({user: String, date: Date, stars: Number, text: {type: String, required: false}})
 const Product = new Schema(
     {
         productName: { type: String, required: true},
         category: { type: String, required: true },
         price: { type: Number, required: true },
         shopName: {type: String, required: true },
-        uid: { type: Number, required: true },
-        reviews: [{type: Review, required: false}],
+        uid: { type: String, required: true },
+        reviews: {type: [Review], required: false},
         count:  {type: Number, required: true }
     },
     { timestamps: true },
