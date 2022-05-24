@@ -50,6 +50,9 @@ const ProductCard = ({item}) => {
             <Typography variant="body2" color="text.secondary">
                 Sprzedawca: {item.shopName}
             </Typography>
+            <Typography variant="subtitle2" color="text.secondary">
+                ProductId: {item._id}
+            </Typography>
         </CardContent>
         <CardActions className={styles.container}>
             <div className={styles.category}> {item.category}</div>
