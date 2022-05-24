@@ -9,7 +9,6 @@ import {useLocation} from "react-router-dom";
 const Products = () => {
     const location = useLocation();
     let initStore =''
-    console.log(location)
     if(location.state){
         initStore = location.state.shopName
     }
@@ -18,6 +17,7 @@ const Products = () => {
     const [sortType, setSortType] = useState();
     const [categoryType, setCategoryType] = useState( ``);
     const [shopName, setShopName] = useState(initStore);
+    const [productName, setProductName] = useState('');
 
     useEffect(() => {
         let paramsToBe = [];
@@ -31,8 +31,9 @@ const Products = () => {
         if (shopName) {
             paramsToBe = [...paramsToBe, ["shopName", shopName]]
         }
-
-        console.log(paramsToBe);
+        if (productName) {
+            paramsToBe = [...paramsToBe, ["productName", productName]]
+        }
 
         const params = new URLSearchParams(paramsToBe);
 
@@ -44,7 +45,7 @@ const Products = () => {
                 console.log(e)
                 toast.error("Cannot load the products :c")
             })
-    }, [shopName, categoryType, sortType]);
+    }, [productName, shopName, categoryType, sortType]);
 
     return (<div>
         <Typography variant="h2" padding={5}>
@@ -92,6 +93,20 @@ const Products = () => {
                 label="Nazwa Sklepu"
                 onChange={(evt) => {
                     setShopName(evt.target.value)
+                }}>
+                <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
+                <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
+            </TextField>
+            </FormControl>
+            <FormControl className={styles.filters}>
+            <InputLabel id="productName-label"> </InputLabel>
+            <TextField
+                labelId="productName-label"
+                id="productName-label-text"
+                value={productName}
+                label="Nazwa Produktu"
+                onChange={(evt) => {
+                    setProductName(evt.target.value)
                 }}>
                 <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
                 <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>

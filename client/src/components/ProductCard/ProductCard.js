@@ -1,8 +1,35 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from './ProductCard.module.css';
-import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardMedia, Rating, Typography} from "@mui/material";
+import api from '../../api';
+import {toast} from 'react-toastify';
+import jwt from 'jsonwebtoken'
 
-const ProductCard = ({item}) => (
+const mapItemReviesToUser = (item) => {
+    const user = jwt.decode(localStorage.getItem('token'));
+    let opinion = item.reviews.filter(p => p.user == user.id);
+    if(opinion.length !== 0) return opinion[0].stars;
+    return 0;
+}
+
+const ProductCard = ({item}) => {
+    const [review, setReview] = useState(mapItemReviesToUser(item));
+
+    const updateReview = (rating) => {
+        let prevRev = review;
+        setReview(rating);
+        api.updateProductById(
+            item._id
+            ,{ review: rating })
+        .then(() => {
+            toast("Succesfully added review!");
+        }).catch(() => {
+            setReview(prevRev)
+            toast.error("Cannot add review",{ });
+        })
+    }
+
+    return (
     <Card>
         <CardMedia
             component="img"
@@ -24,14 +51,21 @@ const ProductCard = ({item}) => (
         </CardContent>
         <CardActions className={styles.container}>
             <div className={styles.category}> {item.category}</div>
-            <Button size="small">Kupuję!</Button>
+            <Button className={styles.buyButton} size="small">Kupuję!</Button>
         </CardActions>
         <CardActions>
-            <Button className={styles.reviewButton}> Oceń produkt! </Button>
-
+            <Typography component="legend"></Typography>
+                <Rating
+                className={styles.rating}
+                name="simple-controlled"
+                value={review}
+                onChange={(evt) => {
+                    updateReview(evt.target.value);
+                }}
+                />
         </CardActions>
-    </Card>
-);
+    </Card>)
+};
 
 ProductCard.propTypes = {};
 
