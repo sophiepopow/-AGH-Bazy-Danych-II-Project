@@ -12,7 +12,7 @@ const Products = () => {
     if(location.state){
         initStore = location.state.shopName
     }
-
+    console.log(initStore)
     const [productsList, setProductList] = useState([]);
     const [sortType, setSortType] = useState();
     const [categoryType, setCategoryType] = useState( ``);

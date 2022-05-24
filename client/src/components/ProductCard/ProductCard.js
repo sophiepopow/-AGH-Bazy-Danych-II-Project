@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styles from './ProductCard.module.css';
 import {Button, Card, CardActions, CardContent, CardMedia, Rating, Typography} from "@mui/material";
 import api from '../../api';
@@ -7,14 +7,17 @@ import jwt from 'jsonwebtoken'
 
 const mapItemReviesToUser = (item) => {
     const user = jwt.decode(localStorage.getItem('token'));
-    let opinion = item.reviews.filter(p => p.user == user.id);
-    if(opinion.length !== 0) return opinion[0].stars;
+    if(user) {
+        let opinion = item.reviews.filter(p => p.user === user.id);
+        if (opinion.length !== 0) return opinion[0].stars;
+    }
     return 0;
 }
 
 const ProductCard = ({item}) => {
+    console.log(item.reviews)
     const [review, setReview] = useState(mapItemReviesToUser(item));
-
+    const avgRating = item.reviews.reduce((total, next) => total + next.stars, 0) / ((item.reviews.length > 0) ? item.reviews.length : 1);
     const updateReview = (rating) => {
         let prevRev = review;
         setReview(rating);
@@ -48,13 +51,23 @@ const ProductCard = ({item}) => {
             <Typography variant="body2" color="text.secondary">
                 Sprzedawca: {item.shopName}
             </Typography>
+            <Typography variant="body2" color="text.secondary">
+                Ocena: {avgRating}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+                Ilość ocen: {item.reviews.length}
+            </Typography>
         </CardContent>
         <CardActions className={styles.container}>
             <div className={styles.category}> {item.category}</div>
             <Button className={styles.buyButton} size="small">Kupuję!</Button>
         </CardActions>
+
+
         <CardActions>
-            <Typography component="legend"></Typography>
+            <Typography gutterBottom variant="h8">
+                Moja ocena:
+            </Typography>
                 <Rating
                 className={styles.rating}
                 name="simple-controlled"

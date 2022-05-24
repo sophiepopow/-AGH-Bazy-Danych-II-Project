@@ -74,7 +74,6 @@ const getProducts = async (req, res) => {
     console.log(match)
     try {
         const products = await Product.find(match).sort(sort);
-        //console.log(products)
         res.status(200).send({ success: true, data: products });
     }
     catch(err){
