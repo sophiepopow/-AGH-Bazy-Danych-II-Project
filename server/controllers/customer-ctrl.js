@@ -126,10 +126,14 @@ const loginCustomer = async (req, res) => {
                 .status(200)
                 .json({ success: false, error: `Customer not found` })
         }
+        var role = 'customer'
+        if (customer.name == 'Admin'){
+            role = 'admin'
+        }
         const token = jwt.sign({
             name: customer.name,
             id: customer._id,
-            role: 'customer'
+            role: role
         }, 'secret123')
         return res.status(200).json({ success: true, data: token })
     }).catch(err => console.log(err))

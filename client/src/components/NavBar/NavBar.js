@@ -15,34 +15,24 @@ import { useNavigate } from 'react-router-dom';
 import styles from './NavBar.module.css';
 import jwt from 'jsonwebtoken'
 
-// mocked users roles
-// admin
-// const user =  {
-//   role: "admin",
-//   email: "admin@admin.com",
-//   name: "Jan",
-//   surname: "Kowalski",
-//   age: 18
-// }
-
 
 const showAlways = () => true
 const isNotLoggedIn = (user) => !user;
 const isLoggedIn = (user) => user;
 const isAdmin = (user) => user && user.role === "admin";
+const isSeller = (user) => user && user.role === "seller"
 
-const pages = ['Login', 'Register', 'Products', 'Admin Panel', 'Stores', "Customer List"];
+const pages = ['Login', 'Register', 'Products', 'Add product', 'Stores', "Admin panel"];
 const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,
   showAlways,
-  isAdmin,
+  isSeller,
   showAlways,
-  isAdmin,
-  isLoggedIn
+  isAdmin
 ]
 
-const pagesLinks = ['/login', '/register', '/products', '/admin','/stores', '/customers/list'];
+const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/customers/list'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
@@ -53,6 +43,7 @@ const ResponsiveAppBar = () => {
     const token = localStorage.getItem('token')
     if(token){
       const data = jwt.decode(token)
+      console.log(data)
       setUser(data);
       if (!data){
         localStorage.removeItem('token')
