@@ -19,8 +19,8 @@ const createProduct = (req, res) => {
     let user = jwt.decode(body.token);
 
     // TO DO when user ready - pass right uid
-    const uid = user.id;
-    const product = new Product({...body, uid})
+    const seller_id = user.id;
+    const product = new Product({...body, seller_id})
 
     if (!product) {
         return res.status(400).json({ success: false, error: err })
