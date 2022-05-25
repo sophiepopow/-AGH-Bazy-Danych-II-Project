@@ -237,7 +237,6 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     "__v" : 0}
     ~~~
 
-## Schemat Bazy Danych
 ## API
 ### Product:
     GET api/products - zwraca wszystkie produkty
@@ -256,15 +255,105 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     DELETE api/customer/:id - usuwa danego klienta
 ### Transaction:
     POST api/transaction - tworzy transakcję
+## Filtry w Produktach
+    ~~~js
+    const getProducts = async (req, res) => {
+    const match={}
+    const sort ={}
+    console.log(req)
+    if(req.query.sortBy){
+        const parts = req.query.sortBy.split('.')
+        sort[parts[0]] = parts[1]==='desc'? -1 : 1
+    }
+
+    if(req.query.productName){
+        match.productName = { $regex: req.query.productName };
+    }
+
+    if(req.query.shopName){
+        match.shopName = { $regex: req.query.shopName };
+    }
+
+    if(req.query.category){
+        match.category = req.query.category;
+    }
+
+    if(req.query.pricelte){
+        match.price = {$lte:req.query.pricelte};
+    }
+
+    if(req.query.pricegte){
+        match.price = {$gte:req.query.pricegte};
+    }
+    console.log(match)
+    try {
+        const products = await Product.find(match).sort(sort);
+        res.status(200).send({ success: true, data: products });
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send({ success: false, error: err });
+    } 
+    }
+    ~~~
+## Dodawanie / Zmiana oceny produktu
+    ~~~js
+    onst updateProductReview = (req, res) => {
+    const body = req.body
+
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide review to update Product',
+        })
+    }
+    if(!body.token) {
+        return res.status(401).json({
+            succes: false,
+            error: "Please login first to add review!"
+        })
+    }
+    let user = jwt.decode(body.token);
+    Product.findOne({ _id: req.params.id }, (err, product) => {
+        if (err) {
+            return res.status(404).json({
+                err,
+                message: 'Product not found!',
+            })
+        }
+        product.reviews = product.reviews.filter(p => p.user !== user.id)
+        product.reviews.push({
+            user: user.id,
+            date: new Date().toDateString(),
+            stars: parseInt(body.review),
+        });
+        product
+            .save()
+            .then(() => {
+                return res.status(200).json({
+                    success: true,
+                    _id: product.id,
+                    message: 'Product updated!',
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                return res.status(404).json({
+                    error,
+                    message: 'Product not updated!',
+                })
+            })
+    })
+    }
+    ~~~
+
 ## Frontend
 React Components:
- - Navbar
- - ProductCard
- - StoreCard
- - AddProductPage
- - BasketPage
- - LoginPage
- - RegisterPage
- - Stores
- - Products
- - AdminPanel
+ - Navbar - Zależnie od roli (klient, sprzedawca, Admin) dostępne są różne podstrony.
+ - AddProductPage - Widok dostępny dla Sprzedawców, gdzie mogą dodać nowy produkt do swojego sklepu lub usunąć dany produkt ze sklepu.
+ - BasketPage - Widok koszyka - produktów, które zamierzamy kupić (kupienie produktów oznacza stworzenie nowej transakcji)
+ - LoginPage - Widok logowania.
+ - RegisterPage - Widok rejestracji.
+ - Stores - Lista Sprzedawców.
+ - Products - Lista Wszystkich Produktów z możliwością sortowania po cenie i filtrowania po Kategorii lub nazwie sklepu.
+ - AdminPanel - gdy zalogujemy się jako Admin dostępnny jest panel Admina, gdzie jest dostępna lista aktulanych klientów i sprzedawców i możliwość usunięcia wybranego z listy.
