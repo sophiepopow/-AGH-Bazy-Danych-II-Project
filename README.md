@@ -6,11 +6,11 @@ Magdalena Skarbińska, Klaudia Sophie Popow, Marcel Spryszyński
 ## Opis Projektu:
 W bazie danych przechowywane są dane sklepów/sprzedawców (lokalnych rolników), oraz ich produktów dostępnych do sprzedaży wraz z ich aktualną ilością na stanie, opisem oraz opiniami. Przechowywane są też dane kupców i ich transakcje.
 
-Administratorzy aplikacji mają dostęp do zarządzania użytkownikami( usunięcie, dodanie, zablokowanie etc.) 
+Administratorzy aplikacji mają dostęp do zarządzania użytkownikami( usunięcie klienta lub sprzedawcy z aktulanej listy).
 
-Sprzedawcy mają dostęp do zarządzania swoim sklepem, modyfikacji produktów w ich ofercie, odpowiadania na opinie i wiadomości klientów
+Sprzedawcy mają dostęp do zarządzania swoim sklepem, modyfikacji produktów w ich ofercie.
 
-Klienci (kupcy produktów) mają możliwość wystawienia wyszukania produktów, zakupienia produktów z wybranego sklepu, dodania opinii za transakcję.
+Klienci (kupcy produktów) mają możliwość wyszukania produktów, zakupienia produktów z wybranego sklepu, dodania opinii za transakcję.
 
 
 ### Baza danych: 
