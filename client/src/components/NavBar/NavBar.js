@@ -27,7 +27,7 @@ const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,
   showAlways,
-  isSeller,
+  (user) => isAdmin(user) || isSeller(user),
   showAlways,
   isAdmin
 ]
@@ -122,12 +122,13 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page, i) => (
-                <MenuItem key={page} onClick={() => {
+                <>{showPanelCondition[i](user) &&
+                  <MenuItem key={page} onClick={() => {
                   navigate(pagesLinks[i]);
                   handleCloseNavMenu();
                 }}>
                   <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                </MenuItem>}</>
               ))}
             </Menu>
           </Box>

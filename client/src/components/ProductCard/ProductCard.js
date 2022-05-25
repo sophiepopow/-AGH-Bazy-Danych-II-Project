@@ -51,6 +51,9 @@ const ProductCard = ({item}) => {
             <Typography variant="body2" color="text.secondary">
                 Sprzedawca: {item.shopName}
             </Typography>
+
+            <Typography variant="subtitle2" color="text.secondary">
+                ProductId: {item._id}
             <Typography variant="body2" color="text.secondary">
                 Ocena: {avgRating}
             </Typography>

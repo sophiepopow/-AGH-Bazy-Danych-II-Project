@@ -129,8 +129,30 @@ const updateProductReview = (req, res) => {
     })
 }
 
+const deleteProduct = (req, res) => {
+    const body = req.body
+
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide id to delete Product',
+        })
+    }
+    // let user = jwt.decode(body.token);
+    Product.deleteOne({ _id: req.params.id}, (err) => {
+        if (err) {
+            return res.status(404).json({
+                err,
+                message: 'Product not found!',
+            })
+        }
+        return res.status(204).send()
+    })
+}
+
 module.exports = {
     createProduct,
     getProducts,
-    updateProductReview
+    updateProductReview,
+    deleteProduct
 }
