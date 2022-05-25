@@ -221,8 +221,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "price" : 4956, 
     "createdAt" : "2022-05-25T11:11:58.891+0000", 
     "updatedAt" : "2022-05-25T11:11:58.891+0000", 
-    "__v" : NumberInt(0)
-}
+    "__v" : 0}
 ~~~
 
 ## Schemat Bazy Danych
