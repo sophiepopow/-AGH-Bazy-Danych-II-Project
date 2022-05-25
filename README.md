@@ -90,6 +90,9 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     ~~~
     
 4) Transactions
+    ~~~js
+    
+    ~~~
 
 ### Przykładowe dane
 1) Customer
@@ -104,9 +107,9 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "createdAt" :"2022-05-25T09:23:55.928+0000", 
     "updatedAt" : "2022-05-25T09:23:55.928+0000", 
     "__v" : 0
-}
+    }
+   ~~~
 
-    ~~~
 2) Seller
     ~~~json
     { 
@@ -222,7 +225,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "createdAt" : "2022-05-25T11:11:58.891+0000", 
     "updatedAt" : "2022-05-25T11:11:58.891+0000", 
     "__v" : 0}
-
+    ~~~
 
 ## Schemat Bazy Danych
 ## API
