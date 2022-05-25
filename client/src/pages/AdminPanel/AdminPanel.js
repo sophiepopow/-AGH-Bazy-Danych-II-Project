@@ -57,11 +57,11 @@ const AdminPanel = () => {
         
         <FormControl>
         <div>
-            Delete Customer
+            Usuń Klienta
         </div>
         <Select
             value={customer}
-            label="Customers"
+            label="Klienci"
             onChange={(evt) => { setCustomer(evt.target.value) }}
         >
             {customersList.map(customer =>
@@ -69,16 +69,16 @@ const AdminPanel = () => {
                 )
             }
         </Select>
-            <Button variant="contained" color="success" onClick={deleteCustomer}>Delete</Button>
+            <Button variant="contained" color="success" onClick={deleteCustomer}>Usuń</Button>
         </FormControl>
         
         <FormControl className={styles.forms}>
         <div>
-            Delete Seller
+            Usuń Sprzedawcę
         </div>
         <Select
             value={seller}
-            label="Sellers"
+            label="Sprzedawcygit "
             onChange={(evt) => { setSeller(evt.target.value) }}
         >
             {sellersList.map(seller =>
@@ -86,7 +86,7 @@ const AdminPanel = () => {
                 )
             }
         </Select>
-            <Button variant="contained" color="success" onClick={deleteSeller}>Delete</Button>
+            <Button variant="contained" color="success" onClick={deleteSeller}>Usuń</Button>
         </FormControl>
     </Grid>
     )

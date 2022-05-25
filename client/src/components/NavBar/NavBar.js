@@ -36,7 +36,7 @@ const showPanelCondition = [
 ]
 
 const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/adminpanel', '/basket'];
-const settings = ['Logout'];
+const settings = ['Wyloguj'];
 
 const ResponsiveAppBar = () => {
 
