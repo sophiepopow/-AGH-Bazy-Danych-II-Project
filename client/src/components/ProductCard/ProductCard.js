@@ -34,7 +34,12 @@ const ProductCard = ({item}) => {
 
     const handleAddToBasket = async ()=>{
         const temp = item
+        if (item.count < 1){
+            toast.error("Cannot add to basket",{ })
+            return
+        }
         temp.count = 1
+        item.count -= 1;
         await api.addToBasket(temp)
         .then(res => {
             console.log(res)
