@@ -54,6 +54,7 @@ const ProductCard = ({item}) => {
 
             <Typography variant="subtitle2" color="text.secondary">
                 ProductId: {item._id}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
                 Ocena: {avgRating}
             </Typography>
@@ -80,7 +81,8 @@ const ProductCard = ({item}) => {
                 }}
                 />
         </CardActions>
-    </Card>)
+    </Card>
+    )
 };
 
 ProductCard.propTypes = {};
