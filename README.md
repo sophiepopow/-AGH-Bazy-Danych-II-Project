@@ -45,11 +45,75 @@ appilcation starts on the port 3000
 ~~~
 
 # Baza Danych
-W bazie danych są 4 Kolekcje: User, Products, Transactions, Stores.
+## Modele w bazie danych
+W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
 
-1) User
-    TODO
-2) Products
+1) Customer
+    ~~~json
+    const Customer = new Schema(
+    {
+        auth:{login:String,password:String},
+        name:String,
+        transactions: [Schema.Types.ObjectId]
+    },
+    { timestamps: true },
+    )
+
+    ~~~
+2) Seller
+    ~~~json
+    const Seller = new Schema(
+    {
+        auth:{login:String,password:String},
+        name:String
+    },
+    { timestamps: true },
+    )
+
+    ~~~
+3) Products
+    ~~~json
+    const Review = new Schema({user: String, date: Date, stars: Number, text: {type: String, required: false}})
+    const Product = new Schema(
+    {
+        productName: { type: String, required: true},
+        category: { type: String, required: true },
+        price: { type: Number, required: true },
+        shopName: {type: String, required: true },
+        uid: { type: String, required: true },
+        reviews: {type: [Review], required: false},
+        count:  {type: Number, required: true }
+    },
+    { timestamps: true },
+    )
+
+    ~~~
+    
+4) Transactions
+
+### Przykładowe dane
+1) Customer
+    ~~~json
+    
+
+    ~~~
+2) Seller
+    ~~~json
+    { 
+    "_id" : ObjectId("6280da7ecdd4393183752174"), 
+    "auth" : {
+        "login" : "strączki123", 
+        "password" : "fasolka888"
+    }, 
+    "name" : "Najlepsze strączkowe", 
+    "rating" : null, 
+    "createdAt" : ISODate("2022-05-15T10:48:30.207+0000"), 
+    "updatedAt" : ISODate("2022-05-15T10:48:30.207+0000"), 
+    "__v" : NumberInt(0)
+    }
+
+    ~~~
+3) Products
     ~~~json
     {
         "_id":"628d13e18cd4f371192ae056",
@@ -71,12 +135,18 @@ W bazie danych są 4 Kolekcje: User, Products, Transactions, Stores.
     }
     ~~~
     
-3) Transactions
-4) Stores 
+4) Transactions
 
 ## Schemat Bazy Danych
 ## API
-
-## Modele
+### Product:
+    GET api/products - zwraca wszystkie produkty
+    PUT api/product/:id - update'uje produkt o danym id
+    POST api/product - dodaje nowy produkt
+    DELETE api/product/:id 
+### Seller:
+    GET api/sellers - zwraca wszystkich sprzedawców
+    GET api/seller/:id - zwraca sprzedawcę o danym id
+    POST api/seller - dodaje nowego sprzedawce
 ## Frontend
 ### Produkty:
