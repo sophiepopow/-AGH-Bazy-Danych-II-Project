@@ -54,7 +54,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     {
         auth:{login:String,password:String},
         name:String,
-        basket: [{product_id:String, productName:String, seller_id:String, count:Number}]
+        basket: [{product_id:String, productName:String, seller_id:String, count:Number, price:Number}]
     { timestamps: true },
     )
 
@@ -144,7 +144,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
         "category":"Owoce",
         "price":10,
         "shopName":"Sklep Pani Basi",
-        "uid":"628ab70945e020ac0917eb72",
+        "seller_id":"628ab70945e020ac0917eb72",
         "count":10,
         "reviews":
           [{
