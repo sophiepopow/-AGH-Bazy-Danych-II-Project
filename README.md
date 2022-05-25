@@ -230,15 +230,17 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     GET api/products - zwraca wszystkie produkty
     PUT api/product/:id - update'uje produkt o danym id
     POST api/product - dodaje nowy produkt
-    DELETE api/product/:id 
+    DELETE api/product/:id - usuwa dany produkt
 ### Seller:
     GET api/sellers - zwraca wszystkich sprzedawców
     GET api/seller/:id - zwraca sprzedawcę o danym id
-    POST api/seller - dodaje nowego sprzedawce
+    POST api/seller - dodaje nowego sprzedawcę
+    DELETE api/seller/:id - usuwa danego sprzedawcę
 ### Customer:
     GET api/customers - zwraca wszystkich klientów
     GET api/seller/:id - zwraca klienta o danym id
     POST api/customer - dodaje nowego sprzedawce
+    DELETE api/customer/:id - usuwa danego klienta
 ## Frontend
 React Components:
  - Navbar
