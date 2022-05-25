@@ -64,7 +64,7 @@ const Products = () => {
                         setSortType(evt.target.value)
                     }}>
                     <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
-                    <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
+                    <MenuItem value={"price.asc"}>Po cenie rosnąco</MenuItem>
                 </Select>
             </FormControl>
             <FormControl className={styles.filters}>
@@ -78,8 +78,8 @@ const Products = () => {
                         setCategoryType(evt.target.value)
                     }}>
                     <MenuItem value={ ``}>Wszystko</MenuItem>
-                    <MenuItem value={"Vegetable"}>Warzywa</MenuItem>
-                    <MenuItem value={"Fruit"}>Owoce</MenuItem>
+                    <MenuItem value={"Warzywa"}>Warzywa</MenuItem>
+                    <MenuItem value={"Owoce"}>Owoce</MenuItem>
                     <MenuItem value={"Bio"}>Bio</MenuItem>
                     <MenuItem value={"Mini"}>Mini</MenuItem>
                 </Select>
@@ -95,7 +95,7 @@ const Products = () => {
                     setShopName(evt.target.value)
                 }}>
                 <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
-                <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
+                <MenuItem value={"price.asc"}>Po cenie rosnąco</MenuItem>
             </TextField>
             </FormControl>
             <FormControl className={styles.filters}>
@@ -109,7 +109,7 @@ const Products = () => {
                     setProductName(evt.target.value)
                 }}>
                 <MenuItem value={"price.desc"}>Po cenie malejąco</MenuItem>
-                <MenuItem value={"price.asc"}>Po cenie Rosnąco</MenuItem>
+                <MenuItem value={"price.asc"}>Po cenie rosnąco</MenuItem>
             </TextField>
             </FormControl>
         </div>

@@ -23,7 +23,8 @@ const isAdmin = (user) => user && user.role === "admin";
 const isSeller = (user) => user && user.role === "seller";
 const isCustomer = (user) => user && user.role === "customer";
 
-const pages = ['Login', 'Register', 'Products', 'Manage product', 'Stores', "Admin panel", "Basket"];
+const pages = ['Zaloguj', 'Zarejestruj', 'Produkty', 'Zarządzaj produktami', 'Sklepy', "Admin panel", "Koszyk"];
+
 const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,

@@ -90,6 +90,9 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     ~~~
     
 4) Transactions
+    ~~~js
+    
+    ~~~
 
 ### Przykładowe dane
 1) Customer
@@ -104,9 +107,9 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "createdAt" :"2022-05-25T09:23:55.928+0000", 
     "updatedAt" : "2022-05-25T09:23:55.928+0000", 
     "__v" : 0
-}
+    }
+   ~~~
 
-    ~~~
 2) Seller
     ~~~json
     { 
@@ -222,7 +225,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "createdAt" : "2022-05-25T11:11:58.891+0000", 
     "updatedAt" : "2022-05-25T11:11:58.891+0000", 
     "__v" : 0}
-
+    ~~~
 
 ## Schemat Bazy Danych
 ## API
@@ -230,15 +233,17 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     GET api/products - zwraca wszystkie produkty
     PUT api/product/:id - update'uje produkt o danym id
     POST api/product - dodaje nowy produkt
-    DELETE api/product/:id 
+    DELETE api/product/:id - usuwa dany produkt
 ### Seller:
     GET api/sellers - zwraca wszystkich sprzedawców
     GET api/seller/:id - zwraca sprzedawcę o danym id
-    POST api/seller - dodaje nowego sprzedawce
+    POST api/seller - dodaje nowego sprzedawcę
+    DELETE api/seller/:id - usuwa danego sprzedawcę
 ### Customer:
     GET api/customers - zwraca wszystkich klientów
     GET api/seller/:id - zwraca klienta o danym id
     POST api/customer - dodaje nowego sprzedawce
+    DELETE api/customer/:id - usuwa danego klienta
 ## Frontend
 React Components:
  - Navbar

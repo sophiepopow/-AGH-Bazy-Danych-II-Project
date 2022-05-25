@@ -4,8 +4,7 @@ const Schema = mongoose.Schema
 const Seller = new Schema(
     {
         auth:{login:String,password:String},
-        name:String,
-        rating:Number
+        name:String
     },
     { timestamps: true },
 )
