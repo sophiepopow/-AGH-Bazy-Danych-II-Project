@@ -255,6 +255,10 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     DELETE api/customer/:id - usuwa danego klienta
 ### Transaction:
     POST api/transaction - tworzy transakcję
+### Basket:
+    GET api/basket/:id - zwraca koszyk o danym id
+    PUT api/basket/:id - update'uje koszyk o danym id
+    
 ## Filtry w Produktach
 
 ~~~js
