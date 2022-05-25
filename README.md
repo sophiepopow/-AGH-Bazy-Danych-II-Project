@@ -105,7 +105,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
 1) Customer
     ~~~json
     { 
-        "_id" : ObjectId("628e3c679d0a356deef7938c"), 
+        "_id" : "628e3c679d0a356deef7938c", 
         "auth" : {
             "login" : "pan", 
             "password" : "$2a$10$H2j0eyASs1cLvfdxue.C4uxOIwhQqjWthg/H689qhMAuyOziH6dw2"
@@ -114,9 +114,9 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
         "basket" : [
 
         ], 
-        "createdAt" : ISODate("2022-05-25T14:25:43.995+0000"), 
-        "updatedAt" : ISODate("2022-05-25T14:29:21.103+0000"), 
-        "__v" : NumberInt(1)
+        "createdAt" : "2022-05-25T14:25:43.995+0000", 
+        "updatedAt" : "2022-05-25T14:29:21.103+0000", 
+        "__v" : 1
     }
    ~~~
 
