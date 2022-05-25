@@ -9,6 +9,7 @@ import Products from './pages/Products/Products'
 import CustomersList from './pages/CustomerList/CustomersList'
 import UserInsert from './pages/RegisterPage/UserInsert'
 import CustomersUpdate from './pages/CustomerUpdate/CustomersUpdate'
+import BasketPage from './pages/BasketPage/BasketPage'
 import LoginPage from './pages/LoginPage/Login'
 import { AddProductPage } from './pages/AddProductPage/AddProductPage'
 import { ToastContainer } from 'react-toastify';
@@ -26,6 +27,7 @@ export const App = () => {
                 <Route path="/stores" element={<Stores />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/addproduct" element={<AddProductPage />} />
+                <Route path="/basket" element={<BasketPage />} />
             </Routes>
         </Router>
     )

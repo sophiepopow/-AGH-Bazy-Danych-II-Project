@@ -10,6 +10,7 @@ export const AddProductPage = () => {
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState(0);
     const [count, setCount] = useState(0);
+    const [productId, setProductId] = useState("");
 
     const submitProduct = () => {
         api.insertProduct({
@@ -29,6 +30,16 @@ export const AddProductPage = () => {
         setShopName("Skep Pani Basi");
         setPrice(0);
         setCount(0);
+    }
+    const deleteProduct = () => {
+        
+        api.deleteProductById(productId)
+        .then(() => {
+            toast("Succesfully deleted product!");
+        }).catch((e) => {
+            toast.error("Cannot delete product" + e,{});
+        })
+        setProductId("");
     }
     return (
         <div>
@@ -81,6 +92,22 @@ export const AddProductPage = () => {
                     <Button variant="contained" color="success" onClick={submitProduct}>Submit</Button>
                 </FormControl>
             </div>
-        </div>
+
+            <div>
+                Delete Product
+            </div>
+            <div>
+                <FormControl>
+                    <TextField
+                        id="outlined-basic"
+                        label="Product id"
+                        variant="outlined"
+                        value={productId}
+                        onChange={(evt) => { setProductId(evt.target.value) }}
+                        />
+                    <Button variant="contained" color="success" onClick={deleteProduct}>Delete</Button>
+                </FormControl>
+            </div>
+    </div>
     )
 }

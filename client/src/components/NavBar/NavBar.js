@@ -20,19 +20,22 @@ const showAlways = () => true
 const isNotLoggedIn = (user) => !user;
 const isLoggedIn = (user) => user;
 const isAdmin = (user) => user && user.role === "admin";
-const isSeller = (user) => user && user.role === "seller"
+const isSeller = (user) => user && user.role === "seller";
+const isCustomer = (user) => user && user.role === "customer";
 
-const pages = ['Login', 'Register', 'Products', 'Manage product', 'Stores', "Admin panel"];
+const pages = ['Login', 'Register', 'Products', 'Manage product', 'Stores', "Admin panel", "Basket"];
+
 const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,
   showAlways,
   (user) => isAdmin(user) || isSeller(user),
   showAlways,
-  isAdmin
+  isAdmin,
+  isCustomer
 ]
 
-const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/customers/list'];
+const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/customers/list', '/basket'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
@@ -43,7 +46,6 @@ const ResponsiveAppBar = () => {
     const token = localStorage.getItem('token')
     if(token){
       const data = jwt.decode(token)
-      console.log(data)
       setUser(data);
       if (!data){
         localStorage.removeItem('token')
@@ -122,12 +124,13 @@ const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page, i) => (
-                <MenuItem key={page} onClick={() => {
+                <>{showPanelCondition[i](user) &&
+                  <MenuItem key={page} onClick={() => {
                   navigate(pagesLinks[i]);
                   handleCloseNavMenu();
                 }}>
                   <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                </MenuItem>}</>
               ))}
             </Menu>
           </Box>

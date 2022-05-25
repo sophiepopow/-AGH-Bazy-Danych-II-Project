@@ -52,11 +52,22 @@ W bazie danych są 4 Kolekcje: User, Products, Transactions, Stores.
 2) Products
     ~~~json
     {
-        "category": "Fruit",
-        "productName": "Gruszka",
-        "price": "8",
-        "shopName": "Sklep Pani Basi",
-        "count": "3"
+        "_id":"628d13e18cd4f371192ae056",
+        "productName":"Truskawki",
+        "category":"Owoce",
+        "price":10,
+        "shopName":"Sklep Pani Basi",
+        "uid":"628ab70945e020ac0917eb72",
+        "count":10,
+        "reviews":
+          [{
+            "user":"628bedbfc114009ada693f55",
+            "date":"2022-05-23T22:00:00.000Z",
+            "stars":4,"_id":"628d425b779d0c1a496c17b1"
+          }],
+        "createdAt":"2022-05-24T17:20:33.217Z",
+        "updatedAt":"2022-05-24T20:38:51.359Z",
+        "__v":5}]}
     }
     ~~~
     
@@ -65,6 +76,7 @@ W bazie danych są 4 Kolekcje: User, Products, Transactions, Stores.
 
 ## Schemat Bazy Danych
 ## API
+
 ## Modele
 ## Frontend
 ### Produkty:
