@@ -46,7 +46,7 @@ appilcation starts on the port 3000
 
 # Baza Danych
 ## Modele w bazie danych
-W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
+W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
 
 1) Customer
     ~~~js
