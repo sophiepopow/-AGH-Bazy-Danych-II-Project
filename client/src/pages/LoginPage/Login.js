@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import api from '../../api'
+import { toast } from 'react-toastify';
 
 function Copyright(props) {
     return (
@@ -50,7 +51,8 @@ export default function SignInSide() {
         if (user == 'customer'){
             await api.loginCustomer(payload).then(res => {
                 if (res.data.data){
-                    window.alert(`Customer logged successfully`)
+                    toast(`Customer logged successfully`)
+                    // window.alert(`Customer logged successfully`)
                     window.location.href = '/products'
                     localStorage.setItem('token', res.data.data)
                 } else {
@@ -61,7 +63,8 @@ export default function SignInSide() {
         else{
             await api.loginSeller(payload).then(res => {
                 if (res.data.data){
-                    window.alert(`Customer logged successfully`)
+                    toast(`Customer logged successfully`)
+                    // window.alert(`Customer logged successfully`)
                     window.location.href = '/products'
                     localStorage.setItem('token', res.data.data)
                 } else {

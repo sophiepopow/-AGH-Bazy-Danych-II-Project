@@ -1,8 +1,9 @@
 import api from '../../api'
 import Button from '@mui/material/Button';
-import { TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Grid, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import styles from './AddProductPage.module.css';
 
 export const AddProductPage = () => {
     const [category, setCategory] = useState("Warzywa");
@@ -42,11 +43,12 @@ export const AddProductPage = () => {
         setProductId("");
     }
     return (
-        <div>
+        <Grid container spacing={7} justifyContent={"center"} padding={10} sx={{display: 'flex'}}>
+            
             <div>
-                Add Product
-            </div>
-            <div>
+                <div>
+                    Add Product
+                </div>
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">Category</InputLabel>
                     <Select
@@ -93,10 +95,11 @@ export const AddProductPage = () => {
                 </FormControl>
             </div>
 
-            <div>
-                Delete Product
-            </div>
-            <div>
+            
+            <div className={styles.forms}>
+                <div>
+                    Delete Product
+                </div>
                 <FormControl>
                     <TextField
                         id="outlined-basic"
@@ -108,6 +111,6 @@ export const AddProductPage = () => {
                     <Button variant="contained" color="success" onClick={deleteProduct}>Delete</Button>
                 </FormControl>
             </div>
-    </div>
+    </Grid>
     )
 }

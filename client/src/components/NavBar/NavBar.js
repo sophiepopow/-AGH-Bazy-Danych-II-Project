@@ -22,7 +22,7 @@ const isLoggedIn = (user) => user;
 const isAdmin = (user) => user && user.role === "admin";
 const isSeller = (user) => user && user.role === "seller"
 
-const pages = ['Login', 'Register', 'Products', 'Add product', 'Stores', "Admin panel"];
+const pages = ['Login', 'Register', 'Products', 'Manage product', 'Stores', "Admin panel"];
 const showPanelCondition = [
   isNotLoggedIn,
   isNotLoggedIn,
@@ -32,7 +32,7 @@ const showPanelCondition = [
   isAdmin
 ]
 
-const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/customers/list'];
+const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/adminpanel'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {

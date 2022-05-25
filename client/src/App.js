@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import NavBar from './components/NavBar/NavBar'
 import Stores from './pages/Stores/Stores'
 import Products from './pages/Products/Products'
-import CustomersList from './pages/CustomerList/CustomersList'
+import AdminPanel from './pages/AdminPanel/AdminPanel'
 import UserInsert from './pages/RegisterPage/UserInsert'
 import CustomersUpdate from './pages/CustomerUpdate/CustomersUpdate'
 import LoginPage from './pages/LoginPage/Login'
@@ -26,6 +26,7 @@ export const App = () => {
                 <Route path="/stores" element={<Stores />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/addproduct" element={<AddProductPage />} />
+                <Route path="/adminpanel" element={<AdminPanel />} />
             </Routes>
         </Router>
     )

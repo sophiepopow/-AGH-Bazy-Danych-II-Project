@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../../api'
-import {Grid} from "@mui/material";
+import { Grid, TextField, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import styled from 'styled-components'
 
 
@@ -75,12 +75,14 @@ class CustomersList extends React.Component {
         const { customers, isLoading } = this.state
         console.log(customers)
         return (
+            
             <Wrapper>
                 {customers.map(customer =>
                 <Grid key="customer._id">{customer.auth.login} {customer.role}</Grid>
                 )
             }
             </Wrapper>
+        
         )
     }
 }
