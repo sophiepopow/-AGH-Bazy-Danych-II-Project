@@ -222,7 +222,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     "createdAt" : "2022-05-25T11:11:58.891+0000", 
     "updatedAt" : "2022-05-25T11:11:58.891+0000", 
     "__v" : 0}
-~~~
+
 
 ## Schemat Bazy Danych
 ## API
