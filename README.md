@@ -104,17 +104,20 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
 ### Przykładowe dane
 1) Customer
     ~~~json
-    { 
-    "_id" : "628df5abe052afd4b7931c3e", 
+{ 
+    "_id" : ObjectId("628e3c679d0a356deef7938c"), 
     "auth" : {
-        "login" : "user2", 
-        "password" : "$2a$10$.oG16HYm5EQcqhzeHm55cO1gHdbXd79s1evcI0yp8xLRZa3Yssc8q"
+        "login" : "pan", 
+        "password" : "$2a$10$H2j0eyASs1cLvfdxue.C4uxOIwhQqjWthg/H689qhMAuyOziH6dw2"
     }, 
-    "name" : "user2", 
-    "createdAt" :"2022-05-25T09:23:55.928+0000", 
-    "updatedAt" : "2022-05-25T09:23:55.928+0000", 
-    "__v" : 0
-    }
+    "name" : "Miły Pan", 
+    "basket" : [
+
+    ], 
+    "createdAt" : ISODate("2022-05-25T14:25:43.995+0000"), 
+    "updatedAt" : ISODate("2022-05-25T14:29:21.103+0000"), 
+    "__v" : NumberInt(1)
+}
    ~~~
 
 2) Seller
