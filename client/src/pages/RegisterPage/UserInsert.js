@@ -46,7 +46,8 @@ class UserInsert extends Component {
             login: '',
             password: '',
             name:'',
-            transactions:[]
+            transactions:[],
+            basket:[]
         }
 
         this.props = props;
@@ -80,15 +81,16 @@ class UserInsert extends Component {
 
 
     handleIncludeCustomer = async () => {
-        const { login, password, name, transactions } = this.state
-        const payload = { auth:{login, password}, name, transactions }
+        const { login, password, name, transactions, basket } = this.state
+        const payload = { auth:{login, password}, name, transactions, basket}
 
         await api.insertCustomer(payload).then(res => {
             this.setState({
                 login: '',
                 password: '',
                 name:'',
-                transactions:[]
+                transactions:[],
+                basket:[]
             })
             this.props.navigate('/login');
             toast(`Customer inserted successfully`)
@@ -112,7 +114,7 @@ class UserInsert extends Component {
     }
 
     render() {
-        const { role, login, password, name, transactions, rating } = this.state
+        const { role, login, password, name, transactions, basket } = this.state
         return (
             <Wrapper>
                 <Title>Rejestracja</Title>

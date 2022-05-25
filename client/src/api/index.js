@@ -11,6 +11,9 @@ export const deleteCustomerById = id => api.delete(`/customer/${id}`)
 export const getCustomerById = id => api.get(`/customer/${id}`)
 export const loginCustomer = payload => api.post(`/customerlogin`, payload)
 export const getLoggedCustomer = () => api.get(`/customerlogin`)
+export const addToBasket = payload => api.put(`/basket`, {...payload, token: localStorage.getItem('token')})
+export const getBasket = id => api.get(`/basket/${id}`)
+export const updateBasket = (id, payload) => api.put(`/basket/${id}`,payload)
 
 export const insertSeller = payload => api.post(`/seller`, payload)
 export const getAllSellers = () => api.get(`/sellers`)
@@ -47,7 +50,10 @@ const apis = {
     loginCustomer,
     getLoggedCustomer,
     loginSeller,
-    insertTransaction
+    insertTransaction,
+    addToBasket,
+    getBasket,
+    updateBasket
 }
 
 export default apis

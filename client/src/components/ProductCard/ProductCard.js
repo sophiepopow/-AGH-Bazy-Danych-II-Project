@@ -15,8 +15,8 @@ const mapItemReviesToUser = (item) => {
 }
 
 const ProductCard = ({item}) => {
-    console.log(item.reviews)
     const [review, setReview] = useState(mapItemReviesToUser(item));
+    const [count, setCount] = useState(1);
     const avgRating = item.reviews.reduce((total, next) => total + next.stars, 0) / ((item.reviews.length > 0) ? item.reviews.length : 1);
     const updateReview = (rating) => {
         let prevRev = review;
@@ -31,6 +31,24 @@ const ProductCard = ({item}) => {
             toast.error("Cannot add review",{ });
         })
     }
+
+    const handleAddToBasket = async ()=>{
+        const temp = item
+        if (item.count < 1){
+            toast.error("Cannot add to basket",{ })
+            return
+        }
+        temp.count = 1
+        item.count -= 1;
+        await api.addToBasket(temp)
+        .then(res => {
+            console.log(res)
+            toast("Succesfully added review!");
+    }).catch(() => {
+        toast.error("Cannot add to basket",{ });
+    })
+}
+
 
     return (
     <Card>
@@ -64,7 +82,7 @@ const ProductCard = ({item}) => {
         </CardContent>
         <CardActions className={styles.container}>
             <div className={styles.category}> {item.category}</div>
-            <Button className={styles.buyButton} size="small">Kupuję!</Button>
+            <Button className={styles.buyButton} size="small" onClick={handleAddToBasket}>Kupuję!</Button>
         </CardActions>
 
 
