@@ -59,7 +59,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     { timestamps: true },
     )
 
-    ~~~
+
 2) Seller
     ~~~js
     const Seller = new Schema(
