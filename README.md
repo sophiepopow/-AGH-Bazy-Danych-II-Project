@@ -98,7 +98,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
         price: {type: Number, required:true}
     },
     { timestamps: true },
-)
+    )
     
     ~~~
 
