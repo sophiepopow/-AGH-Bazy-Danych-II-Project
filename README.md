@@ -255,3 +255,4 @@ React Components:
  - RegisterPage
  - Stores
  - Products
+ - AdminPanel
