@@ -26,6 +26,8 @@ export const updateProductById = (id, payload) => api.put(`/product/${id}`, {...
 export const deleteProductById = id => api.delete(`/product/${id}`)
 export const getProductById = id => api.get(`/product/${id}`)
 
+export const insertTransaction = payload => api.post(`/transaction`, {...payload,  token: localStorage.getItem('token')});
+
 const apis = {
     insertCustomer,
     getAllCustomers,
@@ -44,7 +46,8 @@ const apis = {
     getSellerById,
     loginCustomer,
     getLoggedCustomer,
-    loginSeller
+    loginSeller,
+    insertTransaction
 }
 
 export default apis

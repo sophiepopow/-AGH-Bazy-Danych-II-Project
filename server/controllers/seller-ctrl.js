@@ -1,8 +1,11 @@
 const Seller = require('../models/seller-model')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
-const createSeller = (req, res) => {
+const createSeller = async (req, res) => {
     const body = req.body
+    const hashedPassword = await bcrypt.hash(req.body.auth.password, 10)
+    body.auth.password = hashedPassword
 
     if (!body) {
         return res.status(400).json({
@@ -116,22 +119,24 @@ const getSellers = async (req, res) => {
 
 const loginSeller = async (req, res) => {
     const {login, password} = req.body.auth;
-    await Seller.findOne({auth:{login:login, password:password}}, (err, seller)=>{
-        if (err) {
-            return res.status(400).json({ success: false, error: err })
-        }
-        if (!seller) {
-            return res
-                .status(200)
-                .json({ success: false, error: `Seller not found` })
-        }
-        const token = jwt.sign({
-            name: seller.name,
-            id: seller._id,
-            role: 'seller'
-        }, 'secret123')
-        return res.status(200).json({ success: true, data: token })
-    }).catch(err => console.log(err))
+    const seller = await Seller.findOne({"auth.login":login})
+    if (!seller) {
+        return res
+            .status(200)
+            .json({ success: false, error: `Wrong login` })
+    }
+    const isPasswordValid = await bcrypt.compare(password, seller.auth.password)
+    if (!isPasswordValid) {
+        return res
+            .status(200)
+            .json({ success: false, error: `Wrong password` })
+    }
+    const token = jwt.sign({
+        name: seller.name,
+        id: seller._id,
+        role: 'seller'
+    }, 'secret123')
+    return res.status(200).json({ success: true, data: token })
 }
 
 module.exports = {

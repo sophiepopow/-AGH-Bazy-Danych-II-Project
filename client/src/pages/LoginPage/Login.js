@@ -49,6 +49,7 @@ export default function SignInSide() {
         const payload = { auth:{login:data.get('login'), password:data.get('password')}}
         if (user == 'customer'){
             await api.loginCustomer(payload).then(res => {
+                console.log(res.data)
                 if (res.data.data){
                     window.alert(`Customer logged successfully`)
                     window.location.href = '/products'

@@ -1,10 +1,13 @@
 const { json } = require('body-parser')
 const Customer = require('../models/customer-model')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
-const createCustomer = (req, res) => {
+const createCustomer = async (req, res) => {
     const body = req.body
-
+    const hashedPassword = await bcrypt.hash(req.body.auth.password, 10)
+    body.auth.password = hashedPassword
+    console.log(body)
     if (!body) {
         return res.status(400).json({
             success: false,
@@ -117,41 +120,31 @@ const getCustomers = async (req, res) => {
 
 const loginCustomer = async (req, res) => {
     const {login, password} = req.body.auth;
-    await Customer.findOne({auth:{login:login, password:password}}, (err, customer)=>{
-        if (err) {
-            return res.status(400).json({ success: false, error: err })
-        }
-        if (!customer) {
+    const customer = await Customer.findOne({"auth.login":login})
+    console.log(customer)
+    if (!customer) {
             return res
                 .status(200)
-                .json({ success: false, error: `Customer not found` })
+                .json({ success: false, error: `Wrong login` })
         }
-        var role = 'customer'
-        if (customer.name == 'Admin'){
-            role = 'admin'
-        }
-        const token = jwt.sign({
-            name: customer.name,
-            id: customer._id,
-            role: role
-        }, 'secret123')
-        return res.status(200).json({ success: true, data: token })
-    }).catch(err => console.log(err))
+    const isPasswordValid = await bcrypt.compare(password, customer.auth.password)
+    if (!isPasswordValid) {
+        return res
+            .status(200)
+            .json({ success: false, error: `Wrong password` })
+    }
+    var role = 'customer'
+    if (customer.name == 'Admin'){
+        role = 'admin'
+    }
+    const token = jwt.sign({
+        name: customer.name,
+        id: customer._id,
+        role: role
+    }, 'secret123')
+    return res.status(200).json({ success: true, data: token })
 }
 
-// const getLoggedCustomer = async (req, res) => {
-//     const token = req.headers['x-access-token']
-//     try {
-// 		const decoded = jwt.verify(token, 'secret123')
-// 		const name = decoded.name
-// 		const user = await Customer.findOne({ email: email })
-
-// 		return res.json({ status: 'ok', customer: user })
-// 	} catch (error) {
-// 		console.log(error)
-// 		res.json({ status: 'error', error: 'invalid token' })
-// 	}
-// }
 
 
 module.exports = {

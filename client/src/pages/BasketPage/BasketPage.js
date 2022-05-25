@@ -73,10 +73,14 @@ const BasketPage = () => {
         })
     }
 
-    const handleBuy = ()=>{
-        window.alert("Kupiono produkty za " +  price)
-        setBasket([])
-        setPrice(0)
+    const handleBuy = async ()=>{
+        const products = basket
+        const payload = { products, price }
+        await api.insertTransaction(payload).then(res => {
+            window.alert("Kupiono produkty za " +  price)
+            setBasket([])
+            setPrice(0)
+        })
     }
   
 
