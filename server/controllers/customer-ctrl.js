@@ -121,7 +121,6 @@ const getCustomers = async (req, res) => {
 const loginCustomer = async (req, res) => {
     const {login, password} = req.body.auth;
     const customer = await Customer.findOne({"auth.login":login})
-    console.log(customer)
     if (!customer) {
             return res
                 .status(200)
@@ -145,6 +144,75 @@ const loginCustomer = async (req, res) => {
     return res.status(200).json({ success: true, data: token })
 }
 
+const addToBasket = async (req, res) => {
+    const body = req.body
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a product',
+        })
+    }
+    if(!body.token) {
+        return res.status(401).json({
+            succes: false,
+            error: "Please login first to add product to basket!"
+        })
+    }
+    let user = jwt.decode(body.token);
+    await Customer.updateOne(
+        { _id: user.id },
+        { $push: { basket: body } }
+     )
+}
+
+
+const getBasket = async (req, res) => {
+    await Customer.findOne({ _id: req.params.id }, (err, customer) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!customer) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Customer not found` })
+        }
+        return res.status(200).json({ success: true, data: customer.basket })
+    }).catch(err => console.log(err))
+}
+
+const updateBasket = async (req, res) => {
+    const body = req.body
+    console.log(body)
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'You must provide a body to update',
+        })
+    }
+
+    Customer.findOne({ _id: req.params.id }, (err, customer) => {
+        if (err) {
+            return res.status(404).json({
+                err,
+                message: 'Customer not found!',
+            })
+        }
+        console.log(body)
+        customer.basket = body
+        customer
+            .save()
+            .then(() => {
+                return res.status(200).json({ success: true, data: customer.basket })
+            })
+            .catch(error => {
+                return res.status(404).json({
+                    error,
+                    message: 'Customer not updated!',
+                })
+            })
+    })
+}
 
 
 module.exports = {
@@ -153,5 +221,8 @@ module.exports = {
     deleteCustomer,
     getCustomers,
     getCustomerById,
-    loginCustomer
+    loginCustomer,
+    addToBasket,
+    getBasket,
+    updateBasket
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import api from "../../api";
 import {toast} from "react-toastify";
 import { makeStyles } from '@mui/styles';
+import jwt from 'jsonwebtoken';
 import { 
     Table,
     TableBody,
@@ -63,7 +64,15 @@ const BasketPage = () => {
     };
 
     const handleDelete = (props) =>{
-        setBasket(basket.filter(data => data != props))
+      const payload = basket.filter(data => data != props)
+      const body = localStorage.getItem('token')
+      let user = jwt.decode(body);
+      console.log(user.id, payload)
+        api.updateBasket(user.id, payload)
+        .then((products) => {
+            setBasket(products.data.data)
+            setPrice(countPrice(products.data.data))
+        })
         setPrice(countPrice(basket))
     }
 
@@ -76,16 +85,23 @@ const BasketPage = () => {
     const handleBuy = async ()=>{
         const products = basket
         const payload = { products, price }
+        const body = localStorage.getItem('token')
+        let user = jwt.decode(body); 
         await api.insertTransaction(payload).then(res => {
             window.alert("Kupiono produkty za " +  price)
+            api.updateBasket(user.id, [])
+             .then((products) => {
             setBasket([])
             setPrice(0)
+        })
         })
     }
   
 
     useEffect(() => {
-        api.getAllProducts()
+      const body = localStorage.getItem('token')
+      let user = jwt.decode(body);
+        api.getBasket(user.id)
         .then((products) => {
             setBasket(products.data.data)
             setPrice(countPrice(products.data.data))
