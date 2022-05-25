@@ -54,6 +54,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     {
         auth:{login:String,password:String},
         name:String,
+        basket: [{product_id:String, productName:String, seller_id:String, count:Number}]
     { timestamps: true },
     )
 
