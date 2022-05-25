@@ -149,4 +149,13 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     GET api/seller/:id - zwraca sprzedawcę o danym id
     POST api/seller - dodaje nowego sprzedawce
 ## Frontend
-### Produkty:
+React Components:
+ - Navbar
+ - ProductCard
+ - StoreCard
+ - AddProductPage
+ - BasketPage
+ - LoginPage
+ - RegisterPage
+ - Stores
+ - Products
