@@ -49,7 +49,7 @@ appilcation starts on the port 3000
 W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
 
 1) Customer
-    ~~~json
+    ~~~js
     const Customer = new Schema(
     {
         auth:{login:String,password:String},
@@ -61,7 +61,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
 
     ~~~
 2) Seller
-    ~~~json
+    ~~~js
     const Seller = new Schema(
     {
         auth:{login:String,password:String},
@@ -72,7 +72,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
 
     ~~~
 3) Products
-    ~~~json
+    ~~~js
     const Review = new Schema({user: String, date: Date, stars: Number, text: {type: String, required: false}})
     const Product = new Schema(
     {
@@ -100,16 +100,16 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
 2) Seller
     ~~~json
     { 
-    "_id" : ObjectId("6280da7ecdd4393183752174"), 
+    "_id" : "6280da7ecdd4393183752174", 
     "auth" : {
         "login" : "strączki123", 
         "password" : "fasolka888"
     }, 
     "name" : "Najlepsze strączkowe", 
     "rating" : null, 
-    "createdAt" : ISODate("2022-05-15T10:48:30.207+0000"), 
-    "updatedAt" : ISODate("2022-05-15T10:48:30.207+0000"), 
-    "__v" : NumberInt(0)
+    "createdAt" : "2022-05-15T10:48:30.207+0000", 
+    "updatedAt" : "2022-05-15T10:48:30.207+0000", 
+    "__v" : 0
     }
 
     ~~~
@@ -131,7 +131,7 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
           }],
         "createdAt":"2022-05-24T17:20:33.217Z",
         "updatedAt":"2022-05-24T20:38:51.359Z",
-        "__v":5}]}
+        "__v":5
     }
     ~~~
     
