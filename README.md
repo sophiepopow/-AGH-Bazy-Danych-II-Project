@@ -123,16 +123,16 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
 2) Seller
     ~~~json
     { 
-    "_id" : "6280da7ecdd4393183752174", 
-    "auth" : {
-        "login" : "strączki123", 
-        "password" : "fasolka888"
-    }, 
-    "name" : "Najlepsze strączkowe", 
-    "rating" : null, 
-    "createdAt" : "2022-05-15T10:48:30.207+0000", 
-    "updatedAt" : "2022-05-15T10:48:30.207+0000", 
-    "__v" : 0
+        "_id" : "6280da7ecdd4393183752174", 
+        "auth" : {
+            "login" : "strączki123", 
+            "password" : "fasolka888"
+        }, 
+        "name" : "Najlepsze strączkowe", 
+        "rating" : null, 
+        "createdAt" : "2022-05-15T10:48:30.207+0000", 
+        "updatedAt" : "2022-05-15T10:48:30.207+0000", 
+        "__v" : 0
     }
 
     ~~~
