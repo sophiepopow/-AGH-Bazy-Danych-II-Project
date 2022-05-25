@@ -54,8 +54,6 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions.
     {
         auth:{login:String,password:String},
         name:String,
-        transactions: [Schema.Types.ObjectId]
-    },
     { timestamps: true },
     )
 
