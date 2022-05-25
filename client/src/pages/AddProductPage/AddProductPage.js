@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 export const AddProductPage = () => {
     const [category, setCategory] = useState("Warzywa");
-    const [shopName, setShopName] = useState("Sklep Pani Basi");
     const [productName, setProductName] = useState("");
     const [price, setPrice] = useState(0);
     const [count, setCount] = useState(0);
@@ -17,17 +16,15 @@ export const AddProductPage = () => {
             category,
             productName,
             price,
-            shopName,
             count
             
         }).then(() => {
-            toast("Succesfully added product!");
+            toast("Dodano produkt!");
         }).catch(() => {
-            toast.error("Cannot add product",{ });
+            toast.error("Błąd, nie dodano produktu",{ });
         })
         setCategory("Warzywa");
         setProductName("");
-        setShopName("Skep Pani Basi");
         setPrice(0);
         setCount(0);
     }
@@ -35,23 +32,23 @@ export const AddProductPage = () => {
         
         api.deleteProductById(productId)
         .then(() => {
-            toast("Succesfully deleted product!");
+            toast("Usunięto produkt!");
         }).catch((e) => {
-            toast.error("Cannot delete product" + e,{});
+            toast.error("Błąd, nie można usunąć produktu" + e,{});
         })
         setProductId("");
     }
     return (
         <div>
             <div>
-                Add Product
+                Dodaj produkt
             </div>
             <div>
                 <FormControl>
                     <InputLabel id="demo-simple-select-label">Category</InputLabel>
                     <Select
                         value={category}
-                        label="Category"
+                        label="Kategoria"
                         onChange={(evt) => { setCategory(evt.target.value) }}
                     >
                         <MenuItem value={"Warzywa"}>Warzywa</MenuItem>
@@ -61,29 +58,22 @@ export const AddProductPage = () => {
                     </Select>
                     <TextField
                         id="outlined-basic"
-                        label="Product name"
+                        label="Nazwa produktu"
                         variant="outlined"
                         value={productName}
                         onChange={(evt) => { setProductName(evt.target.value) }}
                         />
                     <TextField 
                         id="outlined-basic"
-                        label="Price"
+                        label="Cena"
                         variant="outlined"
                         type="number"
                         value={price}
                         onChange={(evt) => { setPrice(evt.target.value) }}
                         />
-                    <TextField
-                        id="outlined-basic"
-                        label="Shop name"
-                        variant="outlined"
-                        value={shopName}
-                        onChange={(evt) => { setShopName(evt.target.value) }}
-                        />
                     <TextField 
                         id="outlined-basic"
-                        label="Count"
+                        label="Ilość"
                         variant="outlined"
                         type="number"
                         value={count}
@@ -94,13 +84,13 @@ export const AddProductPage = () => {
             </div>
 
             <div>
-                Delete Product
+                Usuń Produkt
             </div>
             <div>
                 <FormControl>
                     <TextField
                         id="outlined-basic"
-                        label="Product id"
+                        label="Produkt id"
                         variant="outlined"
                         value={productId}
                         onChange={(evt) => { setProductId(evt.target.value) }}

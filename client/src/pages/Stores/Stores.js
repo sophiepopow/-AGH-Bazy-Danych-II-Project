@@ -22,7 +22,7 @@ const Stores = () => {
 
     return <div className={styles.Stores}>
     <Typography variant="h2" padding={5}>
-            Stores
+            Sklepy
         </Typography>
 
         <Grid container spacing={7} justifyContent={"center"} padding={5} sx={{display: 'flex'}}>

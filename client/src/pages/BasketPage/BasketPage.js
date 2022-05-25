@@ -73,10 +73,14 @@ const BasketPage = () => {
         })
     }
 
-    const handleBuy = ()=>{
-        window.alert("Kupiono produkty za " +  price)
-        setBasket([])
-        setPrice(0)
+    const handleBuy = async ()=>{
+        const products = basket
+        const payload = { products, price }
+        await api.insertTransaction(payload).then(res => {
+            window.alert("Kupiono produkty za " +  price)
+            setBasket([])
+            setPrice(0)
+        })
     }
   
 
@@ -102,7 +106,7 @@ return(
     justifyContent="center"
     style={{ minHeight: '100vh' }}>
         <Typography variant="h2">
-        Basket
+        Koszyk
         </Typography>
         <TableContainer component={Paper} className={classes.tableContainer}>
          <Table className={classes.table} aria-label="simple table">
