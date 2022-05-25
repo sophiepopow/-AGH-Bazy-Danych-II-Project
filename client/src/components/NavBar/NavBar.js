@@ -35,7 +35,7 @@ const showPanelCondition = [
   isCustomer
 ]
 
-const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/customers/list', '/basket'];
+const pagesLinks = ['/login', '/register', '/products', '/addproduct','/stores', '/adminpanel', '/basket'];
 const settings = ['Logout'];
 
 const ResponsiveAppBar = () => {
