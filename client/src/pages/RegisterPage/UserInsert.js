@@ -97,8 +97,8 @@ class UserInsert extends Component {
 
 
     handleIncludeSeller = async () => {
-        const { login, password, name, transactions, rating } = this.state
-        const payload = { auth:{login, password}, name, rating }
+        const { login, password, name} = this.state
+        const payload = { auth:{login, password}, name }
 
         await api.insertSeller(payload).then(res => {
             this.setState({
@@ -115,8 +115,8 @@ class UserInsert extends Component {
         const { role, login, password, name, transactions, rating } = this.state
         return (
             <Wrapper>
-                <Title>Create User</Title>
-                <Label>Username: </Label>
+                <Title>Rejestracja</Title>
+                <Label>Nazwa użytkownika: </Label>
                 <InputText
                     type="text"
                     value={name}
@@ -129,7 +129,7 @@ class UserInsert extends Component {
                     onChange={this.handleChangeInputLogin}
                 />
 
-                <Label>Password: </Label>
+                <Label>Hasło: </Label>
                 <InputText
                     type="password"
                     value={password}
@@ -137,22 +137,21 @@ class UserInsert extends Component {
                 />
                 <Box sx={{display:'flex', flexDirection:'column'}}>
                     <FormControl>
-                    <FormLabel id="radio">Who are you?</FormLabel>
+                    <FormLabel id="radio">Wybierz rolę:</FormLabel>
                     <RadioGroup
                         aria-labelledby="radio"
                         defaultValue="customer"
                         name="radio-buttons-group"
                     >
-                        <FormControlLabel value="customer" onChange={this.handleChange} control={<Radio />} label="Customer" />
-                        <FormControlLabel value="seller" onChange={this.handleChange} control={<Radio />} label="Seller" />
+                        <FormControlLabel value="customer" onChange={this.handleChange} control={<Radio />} label="Kupujący" />
+                        <FormControlLabel value="seller" onChange={this.handleChange} control={<Radio />} label="Sprzedawca" />
                     </RadioGroup>
                     </FormControl>
                     <Box>
                         { role == "customer"
-                            ? <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Register as Customer</Button>
-                            : <Button variant="contained" color="primary" onClick={this.handleIncludeSeller}>Register as Seller</Button>
+                            ? <Button variant="contained" color="primary" onClick={this.handleIncludeCustomer}>Zarejestruj jako kupujący</Button>
+                            : <Button variant="contained" color="primary" onClick={this.handleIncludeSeller}>Zarejestruj jako sprzedawca</Button>
                         }
-                        <Button variant="contained" color="secondary" >Cancel</Button>
                     </Box>
                 </Box>
             </Wrapper>

@@ -20,7 +20,8 @@ const createProduct = (req, res) => {
 
     // TO DO when user ready - pass right uid
     const seller_id = user.id;
-    const product = new Product({...body, seller_id})
+    const shopName = user.name;
+    const product = new Product({...body, seller_id, shopName})
 
     if (!product) {
         return res.status(400).json({ success: false, error: err })

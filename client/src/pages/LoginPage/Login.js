@@ -51,22 +51,22 @@ export default function SignInSide() {
             await api.loginCustomer(payload).then(res => {
                 console.log(res.data)
                 if (res.data.data){
-                    window.alert(`Customer logged successfully`)
+                    window.alert(`Kupujący zalogowany`)
                     window.location.href = '/products'
                     localStorage.setItem('token', res.data.data)
                 } else {
-                    window.alert("Wrong login data")
+                    window.alert("Złe dane logowania")
                 }
             })
         }
         else{
             await api.loginSeller(payload).then(res => {
                 if (res.data.data){
-                    window.alert(`Customer logged successfully`)
+                    window.alert(`Sprzedawca zalogowany`)
                     window.location.href = '/products'
                     localStorage.setItem('token', res.data.data)
                 } else {
-                    window.alert("Wrong login data")
+                    window.alert("Złe dane logowania")
                 }
             })
         }
@@ -104,7 +104,7 @@ export default function SignInSide() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Zaloguj
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleCustomer} sx={{ mt: 1 }}>
                             <TextField
@@ -122,7 +122,7 @@ export default function SignInSide() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="Hasło"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
@@ -132,8 +132,8 @@ export default function SignInSide() {
                                 defaultValue='customer'
                                 name="radio-buttons-group"
                             >
-                            <FormControlLabel value="customer" onChange={handleChange} control={<Radio />} label="Customer" />
-                            <FormControlLabel value="seller" onChange={handleChange} control={<Radio />} label="Seller" />
+                            <FormControlLabel value="customer" onChange={handleChange} control={<Radio />} label="Kupujący" />
+                            <FormControlLabel value="seller" onChange={handleChange} control={<Radio />} label="Sprzedawca" />
                             </RadioGroup>
                             <Button
                                 type="submit"
@@ -141,13 +141,13 @@ export default function SignInSide() {
                                 variant="contained"
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                Sign In
+                                Zaloguj
                             </Button>
                             <Grid container>
 
                                 <Grid item>
                                     <Link href="/register" variant="body2">
-                                        {"Don't have an account? Sign Up"}
+                                        {"Nie masz konta? Zarejestruj się!"}
                                     </Link>
                                 </Grid>
                             </Grid>

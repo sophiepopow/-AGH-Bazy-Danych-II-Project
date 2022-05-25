@@ -28,7 +28,7 @@ function StoreCard({storeName})
         }}>
             <Button size="small" onClick={() => {
                 navigate(`../products/`, {state:{shopName: storeName}})
-            }}>Buy Products</Button>
+            }}>Kup produkty</Button>
         </CardActions>
     </Card>
 }

@@ -106,7 +106,7 @@ return(
     justifyContent="center"
     style={{ minHeight: '100vh' }}>
         <Typography variant="h2">
-        Basket
+        Koszyk
         </Typography>
         <TableContainer component={Paper} className={classes.tableContainer}>
          <Table className={classes.table} aria-label="simple table">
