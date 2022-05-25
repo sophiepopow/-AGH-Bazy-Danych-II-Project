@@ -91,6 +91,14 @@ W bazie danych są 4 Kolekcje: Customer, Seller, Products, Transactions, Stores.
     
 4) Transactions
     ~~~js
+    const Transaction = new Schema(
+    {
+        customer_id: { type: String, required: true },
+        products: [{product_id:String, productName:String, seller_id:String, count:Number}],
+        price: {type: Number, required:true}
+    },
+    { timestamps: true },
+)
     
     ~~~
 
